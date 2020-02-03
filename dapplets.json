@@ -1,0 +1,14 @@
+{
+    "hostnames": {
+        "twitter.com": {
+            "twitter-feature-4.dapplet-base.eth": "0.0.1"
+        }
+    },
+    "modules": {
+        "twitter-feature-4.dapplet-base.eth": {
+            "default": {
+                "0.0.1": "manifest.json"
+            }
+        }
+    }
+}
