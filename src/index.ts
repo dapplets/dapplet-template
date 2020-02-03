@@ -1,7 +1,7 @@
 import { IFeature } from '@dapplets/dapplet-extension'
 import { sayHello } from './helper';
 //import { T_TwitterFeatureConfig, ITwitterAdapter } from '@dapplets/twitter-adapter'
-import FAKESTAMP_PIC from './fakeStamp.png'
+import EXAMPLE_IMG from './example.png'
 
 @Injectable
 export default class TwitterFeature implements IFeature {
@@ -17,11 +17,11 @@ export default class TwitterFeature implements IFeature {
                 button({
                     initial: "DEFAULT",
                     "DEFAULT": {
-                        label: "Template",
+                        label: ":)",
                         exec: (ctx, me) => {
                             sayHello();
                         },
-                        image: FAKESTAMP_PIC
+                        img: EXAMPLE_IMG
                     }
                 })
             ]
