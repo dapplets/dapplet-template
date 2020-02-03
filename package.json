@@ -10,7 +10,7 @@
   "author": "Dapplets Team",
   "license": "MIT",
   "devDependencies": {
-    "@dapplets/dapplet-extension": "^0.1.5",
+    "@dapplets/dapplet-extension": "^0.1.6",
     "@rollup/plugin-image": "^2.0.1",
     "@rollup/plugin-typescript": "^3.0.0",
     "rollup": "^1.30.1",
