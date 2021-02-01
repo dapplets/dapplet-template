@@ -1,31 +1,27 @@
-import { IFeature } from '@dapplets/dapplet-extension'
-import { sayHello } from './helper';
+import { } from '@dapplets/dapplet-extension'
 //import { T_TwitterFeatureConfig, ITwitterAdapter } from '@dapplets/twitter-adapter'
-import EXAMPLE_IMG from './example.png'
+import EXAMPLE_IMG from './icons/icon19.png'
 
 @Injectable
-export default class TwitterFeature implements IFeature {
+export default class TwitterFeature {
+    constructor(
+        @Inject("twitter-adapter.dapplet-base.eth")
+        public adapter: any //ITwitterAdapter;
+    ) {
+        const { button } = this.adapter.exports;
 
-    @Inject("twitter-adapter.dapplet-base.eth")
-    public adapter: any; //ITwitterAdapter;
-    public config: any; //T_TwitterFeatureConfig;
-
-    constructor() {
-        const { button } = this.adapter.widgets;
-        this.config = {
-            TWEET_SOUTH: [
+        this.adapter.attachConfig({
+            POST_SOUTH: [
                 button({
                     initial: "DEFAULT",
                     "DEFAULT": {
-                        label: ":)",
-                        exec: (ctx, me) => {
-                            sayHello();
-                        },
+                        label: "Injected Button",
+                        exec: (ctx, me) => alert('Hello, World!'),
                         img: EXAMPLE_IMG
                     }
                 })
             ]
-        };
+        });
     }
 
     public activate() {
