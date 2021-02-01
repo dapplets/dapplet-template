@@ -29,7 +29,7 @@ Dependencies are defined in the `dependencies` section of the `dapplet.json` fil
 The Twitter adapter is used by default. 
 
 The list of our adapters are available now:
-* [`twitter-adapter.dapplet-base.eth`](https://github.com/dapplets/dapplet-mo(dules/tree/master/packages/twitter-adapter) - site-specific adapter for [Twitter](twitter.com);
+* [`twitter-adapter.dapplet-base.eth`](https://github.com/dapplets/dapplet-modules/tree/master/packages/twitter-adapter) - site-specific adapter for [Twitter](twitter.com);
 * [`instagram-adapter.dapplet-base.eth`](https://github.com/dapplets/dapplet-modules/tree/master/packages/instagram-adapter) - site-specific adapter for [Instagram](instagram.com);
 * [`identity-adapter.dapplet-base.eth`](https://github.com/dapplets/dapplet-modules/tree/master/packages/identity-adapter) - virtual adapter (interface), which is an abstract of two adapters above;
 * [`common-adapter.dapplet-base.eth`](https://github.com/dapplets/dapplet-modules/tree/master/packages/common-adapter) - viewport adapter is universal adapter which contains generic insertion points and is compatible with any web-sites.
