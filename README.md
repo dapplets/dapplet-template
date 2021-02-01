@@ -39,3 +39,27 @@ The list of our adapters are available now:
 * the name of an adapter you depend on (e.g. `twitter-adapter.dapplet-base.eth`);
 * the domain name of a website to which you are creting a dapplet (e.g. `twitter.com`);
 * the identifier of a dynamic context (e.g. `twitter.com/1346093004537425927`).
+
+8. Install the Dapplet Extension for you Chrome browser (if not installed). You can find the lastest release [here](https://github.com/dapplets/dapplet-extension/releases).
+
+9. Run `npm i` and `npm start` commands to start development.
+
+You will see a message like that:
+```
+rollup v2.38.3
+bundles src/index.ts → lib\index.js...
+Current registry address: http://localhost:3001/dapplet.json
+created lib\index.js in 783ms
+
+[2021-02-01 13:58:36] waiting for changes...
+```
+
+The address `http://localhost:3001/dapplet.json` is link to your dapplet manifest file. Copy it to clipboard.
+
+10. Connect the development server to Dapplet Extension.
+
+Paste URL to Developer tab of Dapplet Extension's popup. You will see your module in the list of development module. Here you can start deployment process.
+
+11. Run dapplet at website.
+
+Go to Dapplets tab of Dapplet Extension's popup and turn on your module.
