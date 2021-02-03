@@ -8,7 +8,7 @@
     "exampleHiddenString": "some string value"
   },
   "dev": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleString": "Test: shown",
+    "exampleHiddenString": "Test: hidden"
   }
 }
