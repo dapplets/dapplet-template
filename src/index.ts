@@ -1,6 +1,6 @@
 import {} from '@dapplets/dapplet-extension';
 import COOL_BADGE_IMG from './icons/smile19.png';
-// import ANGRY_BADGE_IMG from './icons/angry-smile19.png';
+import ANGRY_BADGE_IMG from './icons/angry-smile19.png';
 
 @Injectable
 export default class TwitterFeature {
@@ -17,11 +17,15 @@ export default class TwitterFeature {
             label: 'Fake',
             img: COOL_BADGE_IMG,
             // LP: 2. Add function toggling the button state
-
+            exec: (ctx, me) => (me.state = 'ANOTHER'),
             // LP end
           },
           // LP: 1. Add another state to the button
-
+          ANOTHER: {
+            label: 'FAKE!!!',
+            img: ANGRY_BADGE_IMG,
+            exec: (ctx, me) => (me.state = 'DEFAULT'),
+          },
           // LP end
         }),
       ],
