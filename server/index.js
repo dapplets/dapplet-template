@@ -10,7 +10,7 @@ const emitter = new Emitter()
 const callbackMap = new Map()
 let subscriptionCount = 0
 // LP: 5. Add storage for counters
-
+const counter = {}
 // LP end
 
 const app = express()
@@ -78,7 +78,11 @@ app.ws('/:feature', function (ws) {
       const tweetId = ctx.id
       const subscriptionId = (++subscriptionCount).toString()
       // LP: 6. Initialize counter for current tweet
-
+      if (!Object.prototype.hasOwnProperty.call(counter, tweetId)) {
+        counter[tweetId] = {
+          amount: 0,
+        }
+      }
       // LP end
       ws.send(
         JSON.stringify({
@@ -88,12 +92,26 @@ app.ws('/:feature', function (ws) {
         })
       )
       // LP: 7. Send counter in `params`. method = subscriptionId
-
+      ws.send(
+        JSON.stringify({
+          jsonrpc: '2.0',
+          method: subscriptionId,
+          params: [{ amount: counter[tweetId].amount }],
+        })
+      )
       // LP end
       const callback = (currentId) => {
         if (currentId !== tweetId) return
         try {
           // LP: 8. Send counter in `params`. method = subscriptionId, id = currentId
+          ws.send(
+            JSON.stringify({
+              jsonrpc: '2.0',
+              method: subscriptionId,
+              id: currentId,
+              params: [{ amount: counter[currentId].amount }],
+            })
+          )
           // LP end
         } catch (e) {
           emitter.off('attached', callbackMap.get(subscriptionId))
@@ -103,6 +121,9 @@ app.ws('/:feature', function (ws) {
       callbackMap.set(subscriptionId, callback)
     } else if (method === 'increment') {
       // LP: 9. Implement counter increment
+      const [currentId] = params
+      counter[currentId].amount += 1
+      emitter.emit('attached', currentId)
       // LP end
     } else {
       ws.send(
