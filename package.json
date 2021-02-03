@@ -1,10 +1,11 @@
 {
-  "name": "example1",
+  "name": "example1server",
   "version": "0.1.2",
-  "description": "Example 1 of dapplet",
+  "description": "Example 1 of dapplet: Server",
   "main": "lib/index.js",
   "scripts": {
-    "start": "rollup -w --config rollup.config.js",
+    "postinstall": "cd server && npm i",
+    "start": "concurrently -c \"yellow,blue\" -n \"dapplet,server\" \"rollup -w --config rollup.config.js && cd server && node .\" \"cd server && node .\"",
     "build": "rollup --config rollup.config.js",
     "prettify": "npx prettier --write .",
     "lint": "npx eslint ."
@@ -20,6 +21,7 @@
     "@rollup/plugin-typescript": "^8.1.1",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "concurrently": "^6.0.0",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.1.0",

@@ -8,6 +8,7 @@
     "exampleHiddenString": "some string value"
   },
   "dev": {
+    "serverUrl": "ws://localhost:8080/feature-1",
     "exampleString": "some string value",
     "exampleHiddenString": "some string value"
   }
