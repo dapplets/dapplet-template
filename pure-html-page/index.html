@@ -11,7 +11,6 @@
     </style>
     <script type="module">
       import Bridge from 'https://unpkg.com/@dapplets/dapplet-overlay-bridge';
-
       class MyBridge extends Bridge {
         _subId = 0;
 
@@ -22,13 +21,23 @@
           });
         }
         // LP: Add method "onClick" that send message to dapplet
-
+        onClick(tickTock) {
+          this.publish(this._subId.toString(), {
+            type: 'onClick',
+            message: tickTock ? 'tick' : 'tock',
+          });
+        }
         // LP end
       }
       const bridge = new MyBridge();
       bridge.onData((data) => (document.querySelector('.dappletMessage').innerText = data));
       // LP: Add event on button click
-
+      let tickTock = true;
+      const button = document.querySelector('.ch-state-btn');
+      button.addEventListener('click', () => {
+        bridge.onClick(tickTock);
+        tickTock = !tickTock;
+      });
       // LP end
     </script>
   </head>

@@ -11,7 +11,13 @@ class Bridge extends GeneralBridge {
   }
 
   // LP: Add method "onClick" that send message to dapplet
-
+  onClick(tickTock: boolean, callback: (data: any) => void) {
+    callback(!tickTock);
+    this.publish(this._subId.toString(), {
+      type: 'onClick',
+      message: tickTock ? 'tick' : 'tock',
+    });
+  }
   // LP end
 
   public async call(method: string, args: any, callbackEvent: string): Promise<any> {
