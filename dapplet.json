@@ -7,14 +7,14 @@
     "$ref": "package.json#/version"
   },
   "type": "FEATURE",
-  "title": "Dapplet Template",
+  "title": "Example 13",
   "description": {
     "$ref": "package.json#/description"
   },
   "main": {
     "$ref": "package.json#/main"
   },
-  "icon": "src/icons/dapplet-icon.png",
+  "icon": "src/icons/ex13-70px.png",
   "contextIds": [
     "twitter-config.dapplet-base.eth"
   ],
@@ -24,5 +24,8 @@
   },
   "dependencies": {
     "twitter-config.dapplet-base.eth": "0.1.8"
+  },
+  "overlays": {
+    "example-13-overlay": "http://localhost:3000"
   }
 }
