@@ -3,9 +3,12 @@ import EXAMPLE_IMG from './icons/icon19.png';
 
 @Injectable
 export default class TwitterFeature {
+    // LP: Add storage for counters
+
+    // LP end
     constructor(
         @Inject('twitter-adapter.dapplet-base.eth')
-        public adapter: any //ITwitterAdapter;
+        public adapter: any
     ) {
         const { button } = this.adapter.exports;
         this.adapter.attachConfig({
@@ -13,9 +16,16 @@ export default class TwitterFeature {
                 button({
                     initial: 'DEFAULT',
                     DEFAULT: {
-                        label: 'Injected Button',
+                        label: 'Open overlay',
                         img: EXAMPLE_IMG,
-                        exec: (ctx, me) => alert('Hello, World!'),
+                        // LP: Add counter initialisation
+
+                        // LP end
+                        // LP:  1. Implement overlay opening on button click
+                        //      2. Send some data to overlay and get collback 'onClick'
+                        //      3. In callback increse current counter and add received message to label
+
+                        // LP end
                     },
                 }),
             ],
