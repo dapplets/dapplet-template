@@ -23,13 +23,23 @@
                 });
             }
             // LP: Add method "onClick" that send message to dapplet
-
+            onClick(tickTack) {
+                this.publish(this._subId.toString(), {
+                    type: 'onClick',
+                    message: tickTack ? 'tick' : 'tack',
+                });
+            }
             // LP end
         }
         const bridge = new MyBridge();
         bridge.onData(data => document.querySelector('.dappletMessage').innerText = data);
         // LP: Add event on button click
-
+        let tickTack = true;
+        const button = document.querySelector('.ch-state-btn');
+        button.addEventListener('click', () => {
+            bridge.onClick(tickTack);
+            tickTack = !tickTack;
+        });
         // LP end
     </script>
 </head>

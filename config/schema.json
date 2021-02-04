@@ -1,10 +1,15 @@
 {
     "type": "object",
     "required": [
+        "overlayUrl",
         "exampleString",
         "exampleHiddenString"
     ],
     "properties": {
+        "overlayUrl": {
+            "type": "string",
+            "title": "Example of string property"
+        },
         "exampleString": {
             "type": "string",
             "title": "Example of string property"

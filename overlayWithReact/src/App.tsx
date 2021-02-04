@@ -7,19 +7,22 @@ interface Props {
 
 interface State {
   data: string | null;
+  tickTack: boolean;
 }
 
 export default class App extends React.Component<Props, State> {
 
   state = {
-    data: null
+    data: null,
     // LP: supplement the state
-  
+    tickTack: true,   
     // LP end
   };
 
   // LP: Add event on button click
-
+  handleClick = () => {
+    bridge.onClick(this.state.tickTack, (tickTack) => this.setState({ tickTack }));
+  };
   // LP end
 
   componentDidMount() {
@@ -35,7 +38,7 @@ export default class App extends React.Component<Props, State> {
         <div>
           Message from a dapplet: {this.state.data}
         </div>
-        <button className="ch-state-btn">Counter +1</button>
+        <button className="ch-state-btn" onClick={this.handleClick}>Counter +1</button>
       </div>
     );
   }
