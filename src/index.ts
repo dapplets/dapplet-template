@@ -13,9 +13,13 @@ export default class TwitterFeature {
         button({
           initial: 'DEFAULT',
           DEFAULT: {
-            label: 'Injected Button',
+            label: 'Open overlay',
             img: EXAMPLE_IMG,
-            exec: () => alert('Hello, World!'),
+            // LP:  1. Implement overlay opening on button click
+            //      2. Send some data to overlay and get collback 'onClick'
+            //      3. In callback increse current counter and add received message to label
+
+            // LP end
           },
         }),
       ],

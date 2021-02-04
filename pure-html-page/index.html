@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure HTML Example</title>
+    <style>
+      html {
+        background-color: #fff;
+      }
+    </style>
+    <script type="module">
+      import Bridge from 'https://unpkg.com/@dapplets/dapplet-overlay-bridge';
+
+      class MyBridge extends Bridge {
+        _subId = 0;
+
+        onData(callback) {
+          this.subscribe('data', (data) => {
+            callback(data);
+            return (++this._subId).toString();
+          });
+        }
+        // LP: Add method "onClick" that send message to dapplet
+
+        // LP end
+      }
+      const bridge = new MyBridge();
+      bridge.onData((data) => (document.querySelector('.dappletMessage').innerText = data));
+      // LP: Add event on button click
+
+      // LP end
+    </script>
+  </head>
+
+  <body>
+    <h1>Overlay with JavaScript</h1>
+    <div>
+      Info from dapplet:
+      <span class="dappletMessage"></span>
+    </div>
+    <button class="ch-state-btn">Counter +1</button>
+  </body>
+</html>

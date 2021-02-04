@@ -1,14 +1,20 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.1.0",
-  "description": "Template project of dapplet",
+  "name": "example4",
+  "version": "0.1.1",
+  "description": "Example 4 dapplet",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
+    "start-html": "concurrently -c \"yellow,green\" -n \"dapplet,overlay\" \"rollup -w --config rollup.config.js\" \"cd pure-html-page && npx serve -l 3000\"",
+    "start-react": "concurrently -c \"yellow,blue\" -n \"dapplet,overlay\" \"rollup -w --config rollup.config.js\" \"cd overlayWithReact && npm start\"",
     "build": "rollup --config rollup.config.js",
     "prettify": "npx prettier --write .",
     "lint": "npx eslint ."
   },
+  "cacheDirectories": [
+    "node_modules",
+    "overlayWithReact/node_modules"
+  ],
   "author": "Dapplets Project",
   "license": "MIT",
   "devDependencies": {
@@ -20,6 +26,7 @@
     "@rollup/plugin-typescript": "^8.1.1",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "concurrently": "^6.0.0",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.1.0",
