@@ -1,15 +1,22 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.2.0",
-  "description": "Template project of dapplet",
+  "name": "example4.dapplet-base.eth",
+  "version": "0.3.0",
+  "description": "Ex04: Overlays",
   "main": "lib/index.js",
   "scripts": {
-    "start": "rollup -w --config rollup.config.js",
+    "postinstall": "cd overlayWithReact && npm i",
+    "start": "npm run start:js",
+    "start:react": "concurrently -c \"yellow,blue\" -n \"dapplet,overlay:react\" \"rollup -w --config rollup.config.js\" \"cd overlayWithReact && npm start\"",
+    "start:js": "concurrently -c \"yellow,magenta\" -n \"dapplet,overlay:js\" \"rollup -w --config rollup.config.js\" \"cd pure-html-page && npx serve\"",
     "build": "rollup --config rollup.config.js",
     "prettify": "prettier --write ../dapplet-template",
     "eslint": "eslint ../dapplet-template --ext .ts --fix",
     "stylelint": "stylelint ../dapplet-template/**/*.{css,scss,module.scss} --fix"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "overlayWithReact/node_modules"
+  ],
   "author": "Dapplets Project",
   "license": "MIT",
   "devDependencies": {
@@ -21,6 +28,7 @@
     "@rollup/plugin-typescript": "^8.3.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "rollup": "^2.67.2",
+    "concurrently": "^6.0.0",
     "rollup-plugin-serve": "^1.1.0",
     "tslib": "^2.3.1",
     "typescript": "^4.5.5",
