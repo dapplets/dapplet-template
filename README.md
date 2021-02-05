@@ -1,6 +1,6 @@
 # Dapplet Template
 ## Getting Started
-1. Fork and clone the repository.
+1. Click "Use this template". In the opened page choose "Include all branches". Create your repository and clone local.
 
 2. Change module name from "dapplet-template.dapplet-base.eth" to yours in `package.json` file.
 
