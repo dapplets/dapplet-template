@@ -2,7 +2,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "es2017",
-    "lib": ["es2017", "dom"],
+    "lib": ["esnext", "dom"],
     "moduleResolution": "Node",
     "noEmitHelpers": true,
     "esModuleInterop": true,

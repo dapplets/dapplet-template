@@ -1,7 +1,7 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
+  "name": "example5.dapplet-base.eth",
   "version": "0.2.0",
-  "description": "Template project of dapplet",
+  "description": "Ex05: Wallet",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
@@ -13,7 +13,7 @@
   "author": "Dapplets Project",
   "license": "MIT",
   "devDependencies": {
-    "@dapplets/dapplet-extension": "latest",
+    "@dapplets/dapplet-extension": "develop",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "^2.1.1",
     "@rollup/plugin-json": "^4.1.0",
