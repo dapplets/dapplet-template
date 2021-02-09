@@ -1,6 +1,6 @@
 {
   "name": "example5",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Example 5 dapplet",
   "main": "lib/index.js",
   "scripts": {
