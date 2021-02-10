@@ -1,15 +1,15 @@
 import {} from '@dapplets/dapplet-extension'
-import EXAMPLE_IMG from './icons/dapplet-icon.png'
+import EXAMPLE_IMG from './icons/ex06.png'
 
 @Injectable
 export default class TwitterFeature {
-  @Inject('twitter-config.dapplet-base.eth')
+  @Inject('common-config.dapplet-base.eth')
   public adapter
 
   activate() {
     const { button } = this.adapter.exports
     this.adapter.attachConfig({
-      POST: () =>
+      BODY: () =>
         button({
           DEFAULT: {
             label: 'Injected Button',
