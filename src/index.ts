@@ -1,9 +1,9 @@
 import {} from '@dapplets/dapplet-extension'
-import EXAMPLE_IMG from './icons/dapplet-icon.png'
+import EXAMPLE_IMG from './icons/ex07.png'
 
 @Injectable
 export default class TwitterFeature {
-  @Inject('twitter-config.dapplet-base.eth')
+  @Inject('social-virtual-config.dapplet-base.eth')
   public adapter
 
   activate() {
