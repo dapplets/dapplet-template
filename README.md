@@ -1,145 +1,198 @@
-<img width="1245" alt="dapplet-template" src="https://user-images.githubusercontent.com/43613968/225052440-437281a8-63c7-44ba-80df-391974396a4b.png">
+# Example 16: Using Web Components
 
-# Run Your Dapplet
+In this example you will learn how to write Web Components style widgets for adapters.
 
-To run a basic dapplet, follow these steps.
+We will be using the [LitElement](https://lit.dev/) library as an example. The library has different pulgins ([lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin), [lit-html](https://marketplace.visualstudio.com/items?itemName=bierner.lit-html)) for formating and highlighting syntaxis in the Visual Studio Code.
 
-#### 1. Choose the environment to start the project. There are three ways:
+You can download and install them before starting the tutorial, or can find analogies in your favourite IDE.
 
-1. Run the dapplet using **Gitpod**. It is the easiest way to launch **the remotely located dapplet** into the web-browser and try to work with it:
+The initial code for this exmple is stored in this branch: [`ex16-web-components-exercise`](https://github.com/dapplets/dapplet-template/tree/ex16-web-components-exercise). You can pull it to go through the lesson.
 
-[![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
+## Introduction to Web Components
 
-Gitpod can provide fully initialized, perfectly set-up developer environments for any kind of software project. More about Gitpod you can find on its [official website](https://www.gitpod.io/).
+Web Components - is a way of creating reusable custom HTML-elements while encapsulating their logic and isolating CSS-styles. This method usually presumes the use of the following specifications:
 
-2. [Create Dapplet App](https://www.npmjs.com/package/create-dapplet-app) is the best way to start building your own dapplet. To create **a local project**, run:
+- Custom Elements allows the creation of custom HTML-elements with their own tag attribution. Technically, every custom element is a successor of the `HTMLElement` class that's declared in the web-page with the use of the \*`window.customElements.define('my-custom-element', MyCustomElement)` function.
+  After declaration the element becomes available for reuse in DOM, the same as normal HTML-elements `<my-custom-element />`.
 
-```bash
-npx create-dapplet-app
+- Shadow DOM provides an isolation of CSS component styles from global styles of the parent web-page. It works in two modes (`open` and `closed`), that define whether the parent web-page has access to the component's content or not. Shadow DOM doesn't use JavaScript-context, which allows it to use general link type components between the parent page and the web-component.
+
+- HTML Templates are special HTML-elements under the `<template>` tag. They provide a convenient opportunity to clone the template's content into a new element, by using the `template.content.cloneNode(true)` function.
+
+This approach integrates into the adapter architecture perfectly. It enables the creation of widgets by using any compatible libraries, linters, code formatting and other instruments that facilitate the development process.
+
+## Creating a widget
+
+### Prerequisites
+
+1. Clone the project template from this branch: [`ex16-web-components-exercise`](https://github.com/dapplets/dapplet-template/tree/ex16-web-components-exercise)
+2. Install `npm i` dependencies. (this example differs from others by having a library`lit`)
+3. Run the project `npm start`
+4. Add development servers to the extension with the following addresses:
+   - `http://localhost:3001/dapplet.json` (dapplet)
+   - `http://localhost:3002/dapplet.json` (adapter)
+5. On a [Google search result](https://www.google.com/search?q=dapplets) activate the dapplet `Example 16`.
+
+### LP: 1. Import dependencies
+
+First let's import to the `./adapter/src/button.ts` the necessary elements from the library Lit
+
+```typescript
+import { LitElement, html, css } from 'lit'
+import { property } from 'lit/decorators.js'
 ```
 
-This method is currently the most advanced and allows you to flexibly configure your project. You can immediately select the type of project, add an adapter, overlay or server to the dapplet.
+`LitElement` - is a basic class which we will be inheriting from. It expands the native
+`HTMLElement` and hides the extra template rendering, style application, and reactive state change logic.
 
-3. You can use this repo as a template for **your GitHub repository**. Use the button on the project page:
+`html` and `css` - are Tagged Template Literals, which you can use to write HTML and CSS component code. The code inside literals can be highlighted and automatically formatted with the use of the according plugins, which makes the development more convenient.
 
-![Use Template button](https://user-images.githubusercontent.com/79759758/191844612-9615bf33-b93d-4a63-b8db-7a1749fcb3af.png)
+`property` - is a decorator. It can be used to make the properties of the component reactive and publically available to change from the outside. These properties will rerender the component when their values are altered.
 
-#### 2. Change the module name from "dapplet-template.dapplet-base.eth" to your own one in the `package.json` file.
+Read more about other Lit possibilities in its [official documentation](https://lit.dev/docs/).
 
-#### 3. Fill in the fields in the following manifests: `package.json` and `dapplet.json`.
+### LP: 2. Declare custom element class
 
-In `package.json` set the name, version, description, author and license for your dapp.
-The name is the ID of your dapplet so it must be unique.
-In `dapplet.json` set the title.
-This second manifest is required to deploy the dapplet and add it to the dapplet registry.
-You can find more information about the dapplet manifest [here](https://docs.dapplets.org/docs/manifest).
+Inherit the widget class from the `LitElement` class, and implement the interface with public properties `IButtonProps`.
 
-#### 4. Change the icons to your own ones in the `src/icons` folder.
+```typescript
+export class Button extends LitElement implements IButtonProps {}
+```
 
-The icon `src/dapplet-icon.png` is used for the injected button in source code `src/index.ts` and for display in the Dapplets store. The link to this icon is defined in the `dapplet.json` manifest.
+Most likey, your IDE will not like that unrealized class properties are missing. Do not worry, we will do this below.
 
-#### 5. Edit the necessary Dapplet settings in the `config/schema.json` file.
+### LP: 3. Declare a map between contexts and insertion points
 
-The default setting values are defined in the `config/default.json` file.
-The schema follows the rules defined in http://json-schema.org/.
-The Dapplet settings UI is generated by [react-jsonschema-form](https://rjsf-team.github.io/react-jsonschema-form/docs/).
+Widgets can work in different contexts. The contexts can have various insertion points. The compliance between them must be declared transparently.
 
-There are three environments:
+```typescript
+public static contextInsPoints = {
+    SEARCH_RESULT: 'SEARCH_RESULT',
+};
+```
 
-- `dev` - used when a module is loaded from the development server;
-- `test` - used when a module is loaded from the Test Dapplet Registry;
-- `prod` - used when a module is loaded from the Production Dapplet Registry;
+### LP: 4. Implement IButtonProps interface
 
-More about [Dapplet Config](https://docs.dapplets.org/docs/config).
+Add the properties that will be available to the dapplets developer. Every property is marked with a decorator `@property`, this makes them reactive.
 
-#### 6. You can use another Adapter in your Dapplet.
+```typescript
+@property() state; // required
+@property() ctx; // required
+@property() insPointName: string; // required
+@property() img: string;
+@property() label: string;
+@property() loading: boolean;
+@property() disabled: boolean;
+@property() hidden: boolean;
+@property() tooltip: string;
+@property() isActive: boolean;
+@property() exec: (ctx: any, me: IButtonProps) => void;
+@property() init: (ctx: any, me: IButtonProps) => void;
+```
 
-Dependencies are defined in the `dependencies` section of the `dapplet.json` file and are injected in the dapplet's `index.ts` file.
+Please be aware that there are several required properties that must be realized in your widget. They are system properties, which are defined by the Dynamic Adapter.
 
-The Twitter adapter is used by default.
+### LP: 5. Add init callback
 
-Here is our list of adapters available at the moment:
+All widgets are provided with an `init` hook so that dapplets developers can do something the moment a new context appears. This moment needs to be realized transparently.
 
-- [twitter-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/twitter-adapter) - site-specific adapter for [Twitter](https://twitter.com);
-- [instagram-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/instagram-adapter) - site-specific adapter for [Instagram](https://instagram.com);
-- [identity-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/identity-adapter) - virtual adapter (interface), which is an abstract of two adapters above;
-- [common-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/common-adapter) - viewport adapter is a universal adapter which contains generic insertion points and is compatible with any web-sites.
-
-More about Twitter Adapter you can find [here](https://docs.dapplets.org/docs/adapters-docs-list).
-
-#### 7. Fill in the `contextIds` section of the `dapplet.json` file.
-
-`ContextId` is an identifier of a context to which your module is bound. This is usually the same as the name of an adapter you are using. It may be:
-
-- the name of an adapter you depend on (e.g. `twitter-adapter.dapplet-base.eth`);
-- the domain name of a website that your dapplet will run on (e.g. `twitter.com`);
-- the identifier of a dynamic context (e.g. `twitter.com/1346093004537425927`).
-
-#### 8. Specify the argument of @Inject decorator with the chosen adapter in the `/src/index.ts` module and add the `activate()` method with a simple dapplet code.
-
-```js
-import {} from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/dapplet-icon.png';
-
-@Injectable
-export default class TwitterFeature {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
-
-  activate() {
-    const { button } = this.adapter.exports;
-    this.adapter.attachConfig({
-      POST: () =>
-        button({
-          initial: 'DEFAULT',
-          DEFAULT: {
-            label: 'Injected Button',
-            img: EXAMPLE_IMG,
-            exec: () => alert('Hello, World!'),
-          }
-        })
-    });
-  }
+```typescript
+connectedCallback() {
+    super.connectedCallback();
+    this.init?.(this.ctx, this.state);
 }
 ```
 
-#### 9. Install the Dapplets Extension for your Chrome browser (if not installed) - follow the [Installation](https://docs.dapplets.org/docs/installation) steps.
+An overload of the `connectedCallback()` method in LitElement allows us to subscribe to the component rendering event. We will use this.
 
-#### 10. Install dependencies and run the code:
+### LP: 6. Add a click handler function
 
-```bash
-npm i
-npm start
+A dapplets developer should have the possibility to subscribe to the button click event. Beforehand, we will add a click handler with a callback from the `exec` property.
+
+```typescript
+private _clickHandler(e) {
+    this.exec?.(this.ctx, this.state);
+    e.stopPropagation();
+}
 ```
 
-You will see a message like this:
+### LP: 7. Write the HTML code of the widget
 
-```bash
-rollup v2.38.3
-bundles src/index.ts → lib\index.js...
-Current registry address: http://localhost:3001/dapplet.json
-created lib\index.js in 783ms
-[2021-02-01 13:58:36] waiting for changes...
+Let's begin writing the HTML-template of the component.
+
+The `render()` method is very similar to a method with the same name in a class-based approach to writing `React.js` components. Here you can also return `null` when it is not necessary to render the component. However, instead of JSX we use Tagged Template Literal - `html`.
+
+```typescript
+override render() {
+    if (this.hidden) return null;
+
+    return html`
+        <div
+            @click=${this._clickHandler}
+            class="dapplet-widget-results"
+            title="${this.tooltip}"
+        >
+            <img src="${this.img}" />
+            <div>${this.label}</div>
+        </div>
+    `;
+}
 ```
 
-In this example we use a Rollup bundler to compile modules but you can use whatever you want. Webpack for example.
+Learn more about all template possibilities in the official Lit documentation. There you can find information about using conditions in rendering, iterators, events, etc.
 
-The address [http://localhost:3001/dapplet.json](http://localhost:3001/dapplet.json) is a link to your dapplet manifest file. Copy it to a clipboard.
+You can also look at an example of a complex widget from the [Twitter Adapter](https://github.com/dapplets/dapplet-modules/blob/a02906b001d3199ad5002e016f3dd18fbb65160a/packages/twitter-adapter-new/src/wb-button/index.ts).
 
-#### 11. Connect the development server to the Dapplets Extension.
+### LP: 8. Style the widget by CSS
 
-Paste the URL to the Developer tab of the Dapplet Extension's popup and click **Add**.
+Declaration of CSS-styles is very similar to the approach used in the [`styled-components`](https://styled-components.com/) library, famous among React.js developers. Here the Tagged Template Literal - `css` function is used again.
 
-![Developer tab of Extension](https://user-images.githubusercontent.com/43613968/192805069-37d7be51-2a79-41bb-9810-bd01de23342e.png)
+```typescript
+public static override styles = css`
+    .dapplet-widget-results {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    .dapplet-widget-results > img {
+        width: 20px;
+        margin-right: 1em;
+        margin-bottom: 3px;
+    }
+    .dapplet-widget-results > div {
+        display: inline-block;
+        font-size: 1.1em;
+        color: #f5504a;
+        font-weight: bold;
+    }
 
-> If an error occurs, look [here](https://docs.dapplets.org/docs/publishing).
+    .dapplet-widget-results:hover {
+        text-decoration: underline;
+        text-decoration-color: #f5504a;
+    }
+    :host {
+        border: 1px solid rgb(170, 170, 170);
+        display: table;
+        padding: 2px 10px;
+        border-radius: 4px;
+    }
+`;
+```
 
-You will see your module in the list of development modules. Here you can start the deployment process.
+Remeber that your Web Components are rendered inside Shadow DOM, which provides an isolation of the styles. This means that global styles of the parent web-page will not be able to redefine internal styles of your component and you will not be able to use them again.
 
-![Developer tab of Extension](https://user-images.githubusercontent.com/43613968/192805238-9d2ee581-0869-4543-ae2d-3c66a89d4ba3.png)
+Inside Shadow DOM you can style the shadow root element with the use of a CSS pseudo-class `:host()`. Sometimes this is useful for seamless website integration.
 
-#### 12. Run your dapplet on the website.
+Pseudo-classes like `:hover` are also available here. You can use all of CSS power to style your components.
 
-![Developer tab of Extension](https://user-images.githubusercontent.com/43613968/192805390-574a2c66-729c-4f82-b7f2-218770e924c8.png)
+## Final Result
 
-![video](https://docs.dapplets.org/assets/images/get_start-baeacbf6a7a57c08a16ba5c32c8bf1ee.gif)
+Together we have realized a button, that will be inserted into search results on the Google search page.
+
+![](https://docs.dapplets.org/assets/images/ex16-search-result-button-9f4c8301a6fe069c45d66d3330b4dac2.gif)
+
+The final solution is available in this branch: [`ex16-web-components-solution`](https://github.com/dapplets/dapplet-template/tree/ex16-web-components-solution).
+
+The final initial code of the button is available [here](https://github.com/dapplets/dapplet-template/blob/ex16-web-components-solution/adapter/src/button.ts).
+
+![](https://github.com/dapplets/dapplet-docs/blob/master/static/video/ex_16.gif)

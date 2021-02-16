@@ -3,16 +3,12 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "FEATURE",
-  "title": "Dapplet Template",
+  "title": "Example 16",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
-  "icon": "src/icons/dapplet-icon.png",
-  "contextIds": ["twitter-adapter.dapplet-base.eth"],
-  "config": {
-    "schema": "config/schema.json",
-    "default": "config/default.json"
-  },
+  "icon": "src/icons/ex16.png",
+  "contextIds": ["example-google-adapter.dapplet-base.eth"],
   "dependencies": {
-    "twitter-adapter.dapplet-base.eth": "0.9.0"
+    "example-google-adapter.dapplet-base.eth": "0.3.1"
   }
 }

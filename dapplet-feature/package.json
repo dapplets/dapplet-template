@@ -1,0 +1,24 @@
+{
+  "name": "example16.dapplet-base.eth",
+  "version": "0.3.1",
+  "description": "Ex16: Using of Web Components",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "rollup -w --config rollup.config.js",
+    "build": "rollup --config rollup.config.js"
+  },
+  "author": "Dapplets Project",
+  "license": "MIT",
+  "devDependencies": {
+    "@dapplets/dapplet-extension": "develop",
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-image": "^2.1.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.2.0",
+    "@rollup/plugin-typescript": "^8.3.2",
+    "rollup": "^2.70.1",
+    "rollup-plugin-serve": "^1.1.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
+  }
+}
