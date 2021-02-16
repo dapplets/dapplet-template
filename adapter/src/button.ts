@@ -39,6 +39,7 @@ export class Button {
   public static contextInsPoints = {
     MENU: 'MENU',
     SEARCH_RESULT: 'SEARCH_RESULT',
+    DAPPLET_SEARCH_RESULT: 'DAPPLET_SEARCH_RESULT',
   }
 
   public mount(): void {
@@ -72,7 +73,10 @@ export class Button {
         </div>
       `;
       activeNavEl.style.borderBottom = isActive ? 'none' : '3px solid #1a73e8';
-    } else if (this.insPointName === 'SEARCH_RESULT') {
+    } else if (
+      this.insPointName === 'SEARCH_RESULT' ||
+      this.insPointName === 'DAPPLET_SEARCH_RESULT'
+    ) {
       this.el.innerHTML = `
         <div 
           style="display: flex; align-items: center; cursor: pointer;"
@@ -95,7 +99,10 @@ export class Button {
     // LP: 3. add styles for the element depending on the insertion point
     if (this.insPointName === 'MENU') {
       this.el.classList.add('dapplet-widget-menu');
-    } else if (this.insPointName === 'SEARCH_RESULT') {
+    } else if (
+      this.insPointName === 'SEARCH_RESULT' ||
+      this.insPointName === 'DAPPLET_SEARCH_RESULT'
+    ) {
       this.el.classList.add('dapplet-widget-results');
     }
     // LP end

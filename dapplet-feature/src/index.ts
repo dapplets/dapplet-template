@@ -4,7 +4,7 @@ import GRAY_IMG from './icons/ex08-gray.png';
 import GOOGLE_IMG from './icons/ex08-quatro.png';
 import HI_GIF from './imgs/giphy.gif';
 
-/* const searchResults = [
+const searchResults = [
   {
     title: 'Types of Clouds | NOAA SciJinks - All About Weather',
     link: 'https://scijinks.gov/clouds/',
@@ -30,7 +30,7 @@ import HI_GIF from './imgs/giphy.gif';
       often called a thunderhead because torrential rain, vivid lightning and thunder come \
       from it. The tops of such clouds may ...',
   },
-]; */
+];
 
 @Injectable
 export default class GoogleFeature {
@@ -39,7 +39,7 @@ export default class GoogleFeature {
   @Inject('example-google-adapter.dapplet-base.eth') public adapter: any; // LP end
 
   activate() {
-    const { button } = this.adapter.exports;
+    const { button, result } = this.adapter.exports;
     this.adapter.attachConfig({
       MENU: (ctx) =>
         button({
@@ -97,10 +97,30 @@ export default class GoogleFeature {
           },
         }),
       // LP: 9. Add "result" to WIDGETS.
-
+      WIDGETS: () =>
+        result({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: GOOGLE_IMG,
+            title: 'clouds',
+            searchResults,
+          },
+        }),
       // LP end
       // LP: 10. Implement the insertion of buttons into our widget.
-
+      DAPPLET_SEARCH_RESULT: (ctx) =>
+        button({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            label: 'Get data',
+            tooltip: 'Show in the alert',
+            img: EXAMPLE_IMG,
+            exec: () => {
+              const { title, link, description } = ctx;
+              alert(`  title: ${title}\n  link: ${link}\n  description: ${description}`);
+            },
+          },
+        }),
       // LP end
     });
   }
