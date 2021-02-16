@@ -7,22 +7,22 @@
     "$ref": "package.json#/version"
   },
   "type": "FEATURE",
-  "title": "Dapplet Template",
+  "title": "Example 8",
   "description": {
     "$ref": "package.json#/description"
   },
   "main": {
     "$ref": "package.json#/main"
   },
-  "icon": "src/icons/dapplet-icon.png",
+  "icon": "src/icons/ex08.png",
   "contextIds": [
-    "twitter-config.dapplet-base.eth"
+    "example-google-adapter.dapplet-base.eth"
   ],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
   },
   "dependencies": {
-    "twitter-config.dapplet-base.eth": "0.1.8"
+    "example-google-adapter.dapplet-base.eth": "0.3.2"
   }
 }
