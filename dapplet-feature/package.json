@@ -1,0 +1,24 @@
+{
+  "name": "example8.dapplet-base.eth",
+  "version": "0.2.0",
+  "description": "Ex08: New Site specific adapter",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "rollup -w --config rollup.config.js",
+    "build": "rollup --config rollup.config.js"
+  },
+  "author": "Dapplets Project",
+  "license": "MIT",
+  "devDependencies": {
+    "@dapplets/dapplet-extension": "latest",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-image": "^2.1.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "rollup": "^2.67.2",
+    "rollup-plugin-serve": "^1.1.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5"
+  }
+}
