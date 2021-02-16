@@ -20,21 +20,22 @@ export default class GoogleAdapter {
   public config = {
     MENU: {
       containerSelector: '#cnt, .ndYZfc',
-      contextSelector: '#top_nav, .jZWadf',
+      contextSelector: '#top_nav, #topstuff .jZWadf #hdtb-msb',
       insPoints: {
         MENU: {
-          selector: '.MUFPAc, .T47uwc',
+          selector: '.MUFPAc, .T47uwc #hdtb-msb',
           insert: 'inside',
         },
       },
       contextBuilder: (): ContextBuilder => ({
-        id: '',
+        id: 'menu',
         insertPoint: '#rcnt, .mJxzWe',
       }),
     },
     SEARCH_RESULT: {
       containerSelector: '#search',
-      contextSelector: '.MjjYud',
+      contextSelector:
+        '#rso > .g .jtfYYd, #rso > div > .g .jtfYYd, #rso > div > div > .g .jtfYYd, .MjjYud',
       insPoints: {
         SEARCH_RESULT: {
           selector: '.yuRUbf',
@@ -43,24 +44,26 @@ export default class GoogleAdapter {
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       contextBuilder: (searchNode: any): ContextBuilder => ({
-        id: searchNode.querySelector('.yuRUbf > a').href,
-        title: searchNode.querySelector('h3').textContent,
-        link: searchNode.querySelector('.yuRUbf > a').href,
-        description: searchNode.querySelector('.NJo7tc.Z26q7c.uUuwM, .VwiC3b.MUxGbd.yDYNvb.lyLwlc')
-          .textContent,
+        id: searchNode.querySelector('.yuRUbf > a')?.href,
+        title: searchNode.querySelector('h3')?.textContent,
+        link: searchNode.querySelector('.yuRUbf > a')?.href,
+        description:
+          searchNode.querySelector('.uUuwM')?.textContent ||
+          searchNode.querySelector('.IsZvec')?.textContent,
       }),
     },
+    // LP: 6. Add new insertion point WIDGETS on the top of Google widgets.
     WIDGETS: {
       containerSelector: '#search',
       contextSelector: '#rso',
       insPoints: {
         WIDGETS: {
-          selector: '.ULSxyf',
+          selector: '.MjjYud',
           insert: 'begin',
         },
       },
       contextBuilder: (): ContextBuilder => ({
-        id: '',
+        id: 'widgets',
       }),
     },
     DAPPLET_SEARCH_RESULT: {
