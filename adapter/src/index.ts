@@ -11,26 +11,32 @@ export default class TwitterAdapter {
     // LP: 1. implement communication between dapplets and pages
     public config = [
     {
-        containerSelector: '',
-        contextSelector: '',
+        containerSelector: '#cnt, .ndYZfc',
+        contextSelector: '#top_nav, .jZWadf',
         insPoints: {
             MENU: {
-                selector: '',
-                insert: '',
+                selector: '.MUFPAc, .T47uwc',
+                insert: 'inside',
             },
         },
-        contextBuilder: () => ({}),
+        contextBuilder: () => ({
+            insertPoint: '#rcnt, .mJxzWe',
+        }),
     },
     {
-        containerSelector: '',
-        contextSelector: '',
+        containerSelector: '#search',
+        contextSelector: '.tF2Cxc',
         insPoints: {
             SEARCH_RESULT: {
-                selector: '',
-                insert: '',
+                selector: '.yuRUbf',
+                insert: 'inside',
             },
         },
-        contextBuilder: (searchNode: any) => ({}),
+        contextBuilder: (searchNode: any) => ({
+            title: searchNode.querySelector('h3 > span').textContent,
+            link: searchNode.querySelector('.yuRUbf > a').href,
+            description: searchNode.querySelector('.IsZvec').textContent,
+        }),
     },
     // LP: 6. Add new insertion point WIDGETS on the top of Google widgets.
 
