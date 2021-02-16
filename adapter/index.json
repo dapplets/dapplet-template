@@ -16,7 +16,7 @@
       "contextSelector": ".MjjYud > .g",
       "widgets": {
         "button": {
-          "styles": "",
+          "styles": "styles/post/button.css",
           "insertionPoint": "div[data-snf=x5WNvb]",
           "insert": "end"
         }
@@ -32,7 +32,7 @@
       "contextSelector": ".gb_d.gb_Da.gb_H",
       "widgets": {
         "avatarBadge": {
-          "styles": "",
+          "styles": "styles/profile/avatarBadge.css",
           "insertionPoint": "",
           "insert": "end"
         }
