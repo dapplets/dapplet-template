@@ -1,16 +1,24 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
+  "name": "example8.dapplet-base.eth",
   "version": "0.2.0",
-  "description": "Template project of dapplet",
-  "main": "lib/index.js",
+  "description": "Ex08: New Site specific adapter",
+  "main": "index.js",
   "scripts": {
-    "start": "rollup -w --config rollup.config.js",
-    "build": "rollup --config rollup.config.js",
+    "postinstall": "concurrently -c \"yellow,magenta\" -n \"adapter,dapplet\" \"cd adapter && npm i\" \"cd dapplet-feature && npm i\"",
+    "start": "concurrently -c \"yellow,magenta\" -n \"adapter,dapplet\" \"cd adapter && npm start\" \"cd dapplet-feature && npm start\"",
     "prettify": "npx prettier --write .",
     "lint": "npx eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dapplets/dapplet-template.git"
+  },
   "author": "Dapplets Project",
-  "license": "MIT",
+  "homepage": "https://github.com/dapplets/dapplet-template#readme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dapplets/dapplet-template/issues"
+  },
   "devDependencies": {
     "@dapplets/dapplet-extension": "latest",
     "@rollup/plugin-commonjs": "^17.1.0",
@@ -20,6 +28,7 @@
     "@rollup/plugin-typescript": "^8.1.1",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "concurrently": "^5.3.0",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.1.0",
