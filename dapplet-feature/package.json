@@ -1,7 +1,7 @@
 {
-  "name": "example8",
+  "name": "example8part1",
   "version": "0.1.1",
-  "description": "Example 8",
+  "description": "Example 8. Part 1",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
