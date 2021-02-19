@@ -21,12 +21,4 @@ export default class TwitterFeature {
             ],
         });
     }
-
-    public activate() {
-        this.adapter.attachFeature(this);
-    }
-
-    public deactivate() {
-        this.adapter.detachFeature(this);
-    }
 }
