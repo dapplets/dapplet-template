@@ -1,11 +1,13 @@
 import { IFeature } from '@dapplets/dapplet-extension';
 import { Button } from './button';
+import { Result } from './result';
 
 @Injectable
 export default class TwitterAdapter {
 
     public exports = featureId => ({
         button: this.adapter.createWidgetFactory(Button),
+        result: this.adapter.createWidgetFactory(Result),
     });
 
     // LP: 1. implement communication between dapplets and pages
@@ -39,7 +41,19 @@ export default class TwitterAdapter {
         }),
     },
     // LP: 6. Add new insertion point WIDGETS on the top of Google widgets.
-
+    {
+        containerSelector: '#search',
+        contextSelector: '#rso',
+        insPoints: {
+            WIDGETS: {
+                selector: '.ULSxyf',
+                insert: 'begin',
+            },
+        },
+        contextBuilder: () => ({
+            searchQuery: document.title.slice(0, -16),
+        }),
+    },
     // LP end
     ];
     // LP end

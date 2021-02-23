@@ -13,7 +13,7 @@ export default class GoogleFeature {
         // LP end
         public adapter: any
     ) {
-        const { button } = this.adapter.exports;
+        const { button, result } = this.adapter.exports;
         this.adapter.attachConfig({
             MENU: [
                 button({
@@ -73,7 +73,15 @@ export default class GoogleFeature {
                 }),
             ],
             // LP: 8. Add "result" to WIDGETS.
-
+            WIDGETS: [
+                result({
+                    initial: 'DEFAULT',
+                    DEFAULT: {
+                        img: GOOGLE_IMG,
+                        init: (ctx, me) => me.title = ctx.searchQuery,
+                    },
+                }),
+            ],
             // LP end
         });
     }
