@@ -1,14 +1,14 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.2.0",
-  "description": "Template project of dapplet",
+  "name": "example3.dapplet-base.eth",
+  "version": "0.2.1",
+  "description": "Ex03: Widgets interaction",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
     "build": "rollup --config rollup.config.js",
     "prettify": "prettier --write ../dapplet-template",
     "eslint": "eslint ../dapplet-template --ext .ts --fix",
-    "stylelint": "stylelint ../dapplet-template/**/*.{css,scss,module.scss} --fix"
+    "stylelint": "stylelint ./dapplet-template/*.{css,scss,module.scss} --fix"
   },
   "author": "Dapplets Project",
   "license": "MIT",
