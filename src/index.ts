@@ -7,18 +7,29 @@ export default class TwitterFeature {
   @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
   
   activate() {
+    // LP: 1. Get the element 'picture' from adapter
     const { button } = this.adapter.exports;
-    this.adapter.attachConfig({
+    // LP end
+    // $ returns object "me". Use it to change state or params of the other element
+    // Example 1: exec: (ctx) => $(ctx, 'another_el_id').state = 'SECOND'
+    // Example 2: exec: (ctx) => $(ctx, 'another_el_id').label = 'Hello'
+    const { $ } = this.adapter.attachConfig({
       POST_SOUTH: [
         button({
+          id: 'button',
           initial: 'DEFAULT',
           DEFAULT: {
             label: 'Injected Button',
             img: EXAMPLE_IMG,
-            exec: () => alert('Hello, World!'),
+            // LP: 2. Toggle the state “hidden/shown” of the picture on button click
+
+            // LP end
           },
         }),
       ],
+      // LP: 1. Add extra picture to POST_PICTURE and make it hidden by default
+
+      // LP end
     });
   }
 }
