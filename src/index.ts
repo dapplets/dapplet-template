@@ -24,7 +24,7 @@ export default class TwitterFeature {
                         // LP: 1. Open wallet
                         exec:  async (ctx, me) => {
                             me.state = 'PENDING';
-                            this.wallet = this.wallet || await Core.wallet();
+                            this.wallet = await Core.wallet();
                             this.wallet.sendAndListen('eth_accounts', [], {
                                 result: (op, { type, data }) => {
                                     this._currentAddress = data[0];
