@@ -18,13 +18,6 @@ export default class TwitterFeature {
                     DEFAULT: {
                         label: 'Open overlay',
                         img: EXAMPLE_IMG,
-                        // LP: Add counter initialisation
-                        init: (ctx) => {
-                            if (!this.counters.hasOwnProperty(ctx.id)) {
-                                this.counters[ctx.id] = 0;
-                            }
-                        },
-                        // LP end
                         // LP:  1. Implement overlay opening on button click
                         //      2. Send some data to overlay and get collback 'onClick'
                         //      3. In callback increse current counter and add received message to label
