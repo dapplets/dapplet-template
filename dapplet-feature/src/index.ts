@@ -6,7 +6,6 @@ import HI_GIF from './imgs/giphy.gif';
 
 @Injectable
 export default class GoogleFeature {
-    private replacedEl: HTMLElement;
     constructor(
         // LP: insert the correct adapter
         @Inject('google-adapter.dapplet-base.eth')
@@ -29,15 +28,13 @@ export default class GoogleFeature {
                         exec: (ctx, me) => {
                             const el = document.querySelector(ctx.insertPoint);
                             el.style.display = 'none';
-                            if (!this.replacedEl) {
-                                this.replacedEl = document.createElement('div');
-                                this.replacedEl.style.justifyContent = 'center';
-                                const elImg = document.createElement('img');
-                                elImg.src = `${HI_GIF}`;
-                                this.replacedEl.appendChild(elImg);
-                                el.parentElement.appendChild(this.replacedEl);
-                            }
-                            this.replacedEl.style.display = 'flex';
+                            ctx.replacedEl = document.createElement('div');
+                            ctx.replacedEl.style.justifyContent = 'center';
+                            const elImg = document.createElement('img');
+                            elImg.src = `${HI_GIF}`;
+                            ctx.replacedEl.appendChild(elImg);
+                            el.parentElement.appendChild(ctx.replacedEl);
+                            ctx.replacedEl.style.display = 'flex';
                             me.state = 'FRIENDS';
                         },
                     },
@@ -49,7 +46,7 @@ export default class GoogleFeature {
                         exec: (ctx, me) => {
                             const el = document.querySelector(ctx.insertPoint);
                             el.style.display = 'block';
-                            this.replacedEl.style.display = 'none';
+                            ctx.replacedEl.style.display = 'none';
                             me.state = 'RESULTS';
                         },
                     },
