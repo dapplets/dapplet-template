@@ -14,7 +14,21 @@
   "main": {
     "$ref": "package.json#/main"
   },
-  "contextIds": [],
+  "contextIds": [
+    "twitter.com",
+    "instagram.com",
+    "www.instagram.com",
+    "youtube.com",
+    "www.youtube.com",
+    "dapplets.org",
+    "github.com",
+    "google.com",
+    "www.google.com",
+    "facebook.com",
+    "www.facebook.com",
+    "x.com",
+    "www.x.com"
+  ],
   "dependencies": {},
   "interfaces": {
     "example-virtual-adapter.dapplet-base.eth": "0.1.0"

@@ -5,25 +5,25 @@
     },
     "contexts": {
         "GLOBAL": {
-            "containerSelector": "",
+            "containerSelector": "html",
             "contextBuilder": {
-                "id": "",
-                "websiteName": ""
+                "id": "string('global')",
+                "websiteName": "string(//title)"
             }
         },
         "BODY": {
-            "containerSelector": "",
+            "containerSelector": "html",
             "contextSelector": "",
             "widgets": {
                 "button": {
-                    "styles": "",
-                    "insertionPoint": "",
-                    "insert": ""
+                    "styles": "styles/body/button.css",
+                    "insertionPoint": "body",
+                    "insert": "end"
                 }
             },
             "contextBuilder": {
-                "id": "",
-                "websiteName": ""
+                "id": "string('global')",
+                "websiteName": "string(//title)"
             }
         }
     }

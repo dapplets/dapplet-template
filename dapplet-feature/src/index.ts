@@ -4,7 +4,7 @@ import EXAMPLE_IMG from './icons/ex09.png'
 @Injectable
 export default class ViewportFeature {
   // LP: 5. Add a valid adapter
-  @Inject('')
+  @Inject('example-viewport-adapter.dapplet-base.eth')
   public adapter: any
   // LP end
 
@@ -14,6 +14,13 @@ export default class ViewportFeature {
       BODY: (ctx) => [
         button({
           // LP: 6. Add button
+          initial: 'DEFAULT',
+          id: 'button',
+          DEFAULT: {
+            label: 'GOOGLE_EXAMPLE',
+            img: EXAMPLE_IMG,
+            exec: () => Core.alert(ctx.websiteName),
+          },
           // LP end
         }),
       ],

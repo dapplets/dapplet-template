@@ -16,13 +16,13 @@
   },
   "icon": "src/icons/ex09.png",
   "contextIds": [
-    "twitter-config.dapplet-base.eth"
+    "example-viewport-adapter.dapplet-base.eth"
   ],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
   },
   "dependencies": {
-    "twitter-config.dapplet-base.eth": "0.1.8"
+    "example-viewport-adapter.dapplet-base.eth": "0.2.0"
   }
 }
