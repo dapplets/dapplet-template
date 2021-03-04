@@ -1,0 +1,25 @@
+{
+  "name": { "$ref": "package.json#/name" },
+  "branch": "default",
+  "version": { "$ref": "package.json#/version" },
+  "type": "ADAPTER",
+  "title": "Viewport Adapter Example",
+  "description": { "$ref": "package.json#/description" },
+  "main": { "$ref": "package.json#/main" },
+  "contextIds": [
+    "dapplets.org",
+    "127.0.0.1",
+    "forum.dapplets.org",
+    "youtube.com",
+    "www.youtube.com",
+    "twitter.com",
+    "mobile.twitter.com",
+    "google.com",
+    "www.google.com",
+    "www.instagram.com",
+    "instagram.com"
+  ],
+  "dependencies": {
+    "dynamic-adapter.dapplet-base.eth": "0.6.13"
+  }
+}
