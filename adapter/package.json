@@ -1,0 +1,14 @@
+{
+  "name": "example-viewport-adapter.dapplet-base.eth",
+  "version": "0.2.0",
+  "description": "Template project of adapter",
+  "main": "index.json",
+  "scripts": {
+    "start": "serve -l 8080"
+  },
+  "author": "Dapplets Project",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
