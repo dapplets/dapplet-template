@@ -1,0 +1,14 @@
+{
+  "name": "example-google-adapter.dapplet-base.eth",
+  "version": "0.5.0",
+  "description": "Example Google Config",
+  "main": "index.json",
+  "scripts": {
+    "start": "serve -l 8081"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  },
+  "license": "MIT",
+  "author": "Dapplets Project"
+}

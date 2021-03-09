@@ -1,0 +1,45 @@
+{
+  "themes": {
+    "LIGHT": "boolean(//body[@style='background-color: #FFFFFF;'] | //body[@style='background-color: rgb(255, 255, 255);'])",
+    "DARK": "boolean(//body[@style='background-color: rgb(21, 32, 43);'] | //body[@style='background-color: rgb(0, 0, 0);'])"
+  },
+  "contexts": {
+    "GLOBAL": {
+      "containerSelector": "html",
+      "contextBuilder": {
+        "id": "string('global')",
+        "websiteName": "string(//title)"
+      }
+    },
+    "POST": {
+      "containerSelector": "#center_col",
+      "contextSelector": ".MjjYud > .g",
+      "widgets": {
+        "button": {
+          "styles": "styles/post/button.css",
+          "insertionPoint": "div[data-snf=x5WNvb], .yuRUbf",
+          "insert": "end"
+        }
+      },
+      "contextBuilder": {
+        "id": "string(.//*[(@jsname='UWckNb')]/@href)",
+        "title": "string(.//*[(@jsname='UWckNb')]//h3)",
+        "link": "string(.//*[(@jsname='UWckNb')]/@href)"
+      }
+    },
+    "PROFILE": {
+      "containerSelector": "#gb",
+      "contextSelector": ".gb_d.gb_Da.gb_H",
+      "widgets": {
+        "avatarBadge": {
+          "styles": "styles/profile/avatarBadge.css",
+          "insertionPoint": "",
+          "insert": "end"
+        }
+      },
+      "contextBuilder": {
+        "id": "normalize-space(string(@aria-label))"
+      }
+    }
+  }
+}

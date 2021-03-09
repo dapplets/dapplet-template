@@ -1,0 +1,24 @@
+{
+  "name": {
+    "$ref": "package.json#/name"
+  },
+  "branch": "default",
+  "version": {
+    "$ref": "package.json#/version"
+  },
+  "type": "CONFIG",
+  "title": "Google Config",
+  "description": {
+    "$ref": "package.json#/description"
+  },
+  "main": {
+    "$ref": "package.json#/main"
+  },
+  "contextIds": [
+    "google.com",
+    "www.google.com",
+    "https://www.google.com/",
+    "http://www.google.com/"
+  ],
+  "dependencies": {}
+}
