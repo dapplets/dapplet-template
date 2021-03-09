@@ -4,7 +4,7 @@ import EXAMPLE_IMG from './icons/ex10.png'
 @Injectable
 export default class GoogleFeature {
   // LP: 6. Change injecting of Google adapter to Virtual adapter
-  @Inject('example-google-adapter.dapplet-base.eth')
+  @Inject('example-virtual-adapter.dapplet-base.eth')
   public adapter
   // LP end
 

@@ -20,5 +20,8 @@
     "https://www.google.com/",
     "http://www.google.com/"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "interfaces": {
+    "example-virtual-adapter.dapplet-base.eth": "0.5.0"
+  }
 }

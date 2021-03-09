@@ -16,13 +16,13 @@
   },
   "icon": "src/icons/ex10.png",
   "contextIds": [
-    "example-google-adapter.dapplet-base.eth"
+    "example-virtual-adapter.dapplet-base.eth"
   ],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
   },
   "dependencies": {
-    "example-google-adapter.dapplet-base.eth": "0.5.0"
+    "example-virtual-adapter.dapplet-base.eth": "0.5.0"
   }
 }

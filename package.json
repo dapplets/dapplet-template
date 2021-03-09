@@ -4,8 +4,8 @@
   "description": "Ex10: New Virtual adapter (interface)",
   "main": "lib/index.js",
   "scripts": {
-    "postinstall": "concurrently -c \"yellow,magenta\" -n \"example-google-adapter,dapplet\" \"cd example-google-adapter && npm i\" \"cd dapplet-feature && npm i\"",
-    "start": "concurrently -c \"yellow,magenta\" -n \"example-google-adapter,dapplet\" \"cd example-google-adapter && npm start\" \"cd dapplet-feature && npm start\"",
+    "postinstall": "concurrently -c \"yellow,magenta,green,blue\" -n \"example-google-adapter,example-yahoo-adapter,dapplet,example-virtual-adapter\" \"cd example-google-adapter && npm i\" \"cd example-yahoo-adapter && npm i\" \"cd dapplet-feature && npm i\" \"cd example-virtual-adapter && npm i\"",
+    "start": "concurrently -c \"yellow,magenta,green,blue\" -n \"example-google-adapter,example-yahoo-adapter,dapplet,example-virtual-adapter\" \"cd example-google-adapter && npm start\" \"cd example-yahoo-adapter && npm start\" \"cd dapplet-feature && npm start\" \"cd example-virtual-adapter && npm start\"",
     "prettify": "prettier --write ../dapplet-template",
     "eslint": "eslint ../dapplet-template --ext .ts --fix",
     "stylelint": "stylelint ../dapplet-template/**/*.{css,scss,module.scss} --fix"
