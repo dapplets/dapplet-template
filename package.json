@@ -4,8 +4,8 @@
   "description": "Example 10: New virtual adapter",
   "main": "index.js",
   "scripts": {
-    "postinstall": "concurrently -c \"yellow,magenta\" -n \"google-adapter,dapplet\" \"cd google-adapter && npm i\" \"cd dapplet-feature && npm i\"",
-    "start": "concurrently -c \"yellow,magenta\" -n \"google-adapter,dapplet\" \"cd google-adapter && npm start\" \"cd dapplet-feature && npm start\"",
+    "postinstall": "concurrently -c \"yellow,magenta,green,blue\" -n \"google-adapter,yahoo-adapter,dapplet,my-virtual-adapter\" \"cd google-adapter && npm i\" \"cd yahoo-adapter && npm i\" \"cd dapplet-feature && npm i\" \"cd my-virtual-adapter && npm i\"",
+    "start": "concurrently -c \"yellow,magenta,green,blue\" -n \"google-adapter,yahoo-adapter,dapplet,my-virtual-adapter\" \"cd google-adapter && npm start\" \"cd yahoo-adapter && npm start\" \"cd dapplet-feature && npm start\" \"cd my-virtual-adapter && npm start\"",
     "prettify": "npx prettier --write .",
     "lint": "npx eslint ."
   },

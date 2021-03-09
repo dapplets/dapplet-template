@@ -35,7 +35,7 @@ const searchResults = [
 export default class GoogleFeature {
   constructor(
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Inject('google-adapter.dapplet-base.eth') public adapter: any,
+    @Inject('my-virtual-adapter.dapplet-base.eth') public adapter: any,
   ) {
     const { button, result } = this.adapter.exports;
     this.adapter.attachConfig({

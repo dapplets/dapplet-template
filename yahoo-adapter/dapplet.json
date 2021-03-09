@@ -3,10 +3,10 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "ADAPTER",
-  "title": "Google Adapter",
+  "title": "Yahoo Adapter",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
-  "contextIds": ["google.com", "www.google.com"],
+  "contextIds": ["yahoo.com", "www.yahoo.com", "search.yahoo.com"],
   "dependencies": {
     "dynamic-adapter.dapplet-base.eth": "0.5.0"
   },
