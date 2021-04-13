@@ -52,15 +52,31 @@ The list of our adapters are available now:
 - the domain name of a website to which you are creting a dapplet (e.g. `twitter.com`);
 - the identifier of a dynamic context (e.g. `twitter.com/1346093004537425927`).
 
-#### 8. Specify the argument of `@Inject` decorator with chosen adapter in the `/src/index.ts` module.
+#### 8. Specify the argument of `@Inject` decorator with chosen adapter in the `/src/index.ts` module and add method `activate()` with the simple dapplet code.
 
 ```js
+import {} from '@dapplets/dapplet-extension';
+import EXAMPLE_IMG from './icons/icon19.png';
+
 @Injectable
 export default class TwitterFeature {
-  constructor(
-    @Inject('twitter-adapter.dapplet-base.eth') public adapter: any,
-  ) {
-     ...
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
+  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
+  
+  activate() {
+    const { button } = this.adapter.exports;
+    this.adapter.attachConfig({
+      POST_SOUTH: [
+        button({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            label: 'Injected Button',
+            img: EXAMPLE_IMG,
+            exec: () => alert('Hello, World!'),
+          },
+        }),
+      ],
+    });
   }
 }
 ```
