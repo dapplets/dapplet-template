@@ -1,6 +1,6 @@
 # Getting Started
 
-To run the simpliest dapplet, follow this steps.
+To run the simpliest dapplet, follow these steps.
 
 #### 1. Clone [Dapplet Template](https://github.com/dapplets/dapplet-template) repository locally.
 
