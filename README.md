@@ -89,16 +89,16 @@ The address [http://localhost:3001/dapplet.json](http://localhost:3001/dapplet.j
 
 Paste URL to Developer tab of Dapplet Extension's popup and click **Add**.
 
-![Developer tab of Extension](https://github.com/dapplets/dapplet-docs/tree/master/static/img/gs_1.jpg)
+![Developer tab of Extension](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/img/gs_1.jpg)
 
 You will see your module in the list of development module. Here you can start deployment process.
 
-![Developer tab of Extension](https://github.com/dapplets/dapplet-docs/tree/master/static/img/gs_2.jpg)
+![Developer tab of Extension](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/img/gs_2.jpg)
 
 #### 12. Run your dapplet in the website.
 
-![Developer tab of Extension](https://github.com/dapplets/dapplet-docs/tree/master/static/img/gs_3.jpg)
+![Developer tab of Extension](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/img/gs_3.jpg)
 
 #### Here is an example:
 
-![video](https://github.com/dapplets/dapplet-docs/tree/master/static/video/ex00-master.gif)
+![video](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/video/ex00-master.gif)
