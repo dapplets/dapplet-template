@@ -3,10 +3,10 @@ import EXAMPLE_IMG from './icons/icon19.png';
 
 @Injectable
 export default class TwitterFeature {
-  constructor(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-    @Inject('twitter-adapter.dapplet-base.eth') public adapter: any,
-  ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
+  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
+  
+  activate() {
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
       POST_SOUTH: [
