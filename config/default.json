@@ -1,14 +1,17 @@
 {
   "main": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://gateway.ethswarm.org/files/489c2ff49d4a4c1764e2d812dfd1f0073ff867f5f48b9529d5241768bf57ff42"
   },
   "test": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://gateway.ethswarm.org/files/489c2ff49d4a4c1764e2d812dfd1f0073ff867f5f48b9529d5241768bf57ff42"
   },
   "dev": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://localhost:3001/src/data.json"
   }
 }

@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "required": ["exampleString", "exampleHiddenString"],
+  "required": ["exampleString", "exampleHiddenString", "dataUrl"],
   "properties": {
     "exampleString": {
       "type": "string",
@@ -9,6 +9,11 @@
     "exampleHiddenString": {
       "type": "string",
       "title": "Example of hidden string property",
+      "hidden": true
+    },
+    "dataUrl": {
+      "type": "string",
+      "title": "Data URL",
       "hidden": true
     }
   }
