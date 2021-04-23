@@ -1,14 +1,17 @@
 {
   "main": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://arweave.net/4_zIFgxcn22WmTlkAYaolOKLMcpFdiFYhOp7LR9OUvQ/"
   },
   "test": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://arweave.net/4_zIFgxcn22WmTlkAYaolOKLMcpFdiFYhOp7LR9OUvQ/"
   },
   "dev": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://localhost:3001/src/data.json"
   }
 }
