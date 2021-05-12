@@ -1,41 +1,159 @@
-# Example 04: Overlays
+# Ex12: New Overlay Interface
 
-- [Pure HTML page](https://github.com/dapplets/dapplet-overlay-bridge/tree/master/examples/pure-html-page)
-- [React.js based example](https://github.com/dapplets/dapplet-overlay-bridge/tree/master/examples/react-overlay)
+The main advantage of the new interface is the deployment of the dapplet and overlay together.
 
-1. Install [Dapplet-Overlay Bridge](https://github.com/dapplets/dapplet-overlay-bridge).
-2. Realize overlays (run as separate apps):
-   - Add button to overlay, that send new name for dapplet button. For example, toggle "tick-tock";
-   - Add counter in dapplet, that count amount of clicks on overlay button.
-3. Communication between the dapplet and the overlay:
+This example based on [Ex04: Overlays.](https://github.com/dapplets/dapplet-template/tree/ex04-overlays-solution)
 
-   - send data to the overlay;
-   - send data to the dapplet.
+In the code of the **dapplet** change overlay argument `url` to `name`:
 
-   There are two methods in the class Bridge:
+```typescript
+// /src/index.ts
 
-   1. this.subscribe(type, fn) - to get data;
-   2. this.publish(this.\_subId.toString(), { type, message }) - to send data.
+// old
+const overlayUrl = await Core.storage.get('overlayUrl');
+const overlay = Core.overlay({ url: overlayUrl, title: 'Exercise 04' });
 
-   They are using inside of class methods.
-   type = method's name.
+// new
+const overlay = Core.overlay({ name: 'exercise-12-overlay', title: 'Exercise 12' });
+```
 
-   - Don't forget to add "overlayUrl" to config.
-   - For running dapplet with overlay choose one of npm scripts: npm run start-html | npm run start-react
+Now we don't get the **url** from the *Core.storage*, so we can remove **overlayUrl** from `/config/default.json` and `/config/schema.json`.
 
-4. Publish React overlay to a decentralized storage (Swarm)
+Add to the `dapplet.json` manifest the following option:
 
-- in overlay's package.json add `"homepage": "./"` and scripts `"archive"`, `"swarm:upload"`, `"deploy"`:
+```json
+"overlays": {
+  "exercise-12-overlay": "http://localhost:3002"
+}
+```
 
-        "homepage": "./",
-        "scripts": {
-            "archive": "cd ./build && tar -cvf temp.tar .",
-            "swarm:upload": "curl -X POST -H \"Content-Type: application/x-tar\" -H \"Swarm-Index-Document: index.html\" -H \"Swarm-Error-Document: index.html\" --data-binary @build/temp.tar https://gateway.ethswarm.org/dirs",
-            "deploy": "npm run build && npm run archive && npm run swarm:upload"
-        }
+The **overlay** should have the following configuration:
 
-- from overlay's directory run deploy: `npm run deploy`;
-- copy hash from console: `{"reference":"7cf\*\*\*dac17e"}`;
-- add to url `https://gateway.ethswarm.org/bzz/` (expects something like this: `https://gateway.ethswarm.org/bzz/7cf\*\*\*dac17e/`);
-- the url add to config to default.json and add appropriate field to schema.json;
-- get the url in the dapplet asynchronously: `Core.storage.get('field_of_your_url')`.
+* `package.json`:
+
+```json
+{
+  "name": "exercise-12-overlay",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@types/node": "^15.0.2",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.3",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.26.0",
+    "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.2.6",
+    "html-webpack-plugin": "^5.3.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
+    "webpack": "^5.36.2",
+    "webpack-assets-manifest": "^5.0.6",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
+```
+
+* `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["node"],
+    "jsx": "react"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+```
+
+* `webpack.config.js`:
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
+
+module.exports = {
+  mode: 'development',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    clean: true,
+  },
+  entry: './src/index.tsx',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
+        include: path.resolve(__dirname, 'src'),
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: [/\.eot$/, /\.ttf$/, /\.woff$/, /\.woff2$/, /\.svg$/, /\.png$/],
+        use: 'file-loader',
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({ template: 'public/index.html' }),
+    new ForkTsCheckerWebpackPlugin(),
+    new WebpackAssetsManifest(),
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'build'),
+    port: 3002,
+    hot: false,
+    inline: false,
+    liveReload: false,
+    open: false,
+  },
+};
+```
+
+**Run** the dapplet:
+
+```bash
+npm i
+npm run start-react
+```
+
+Now you can simply **deploy** the dapplet without deploying the overlay separately.
+
+This page in the docs is [here.](https://docs.dapplets.org/docs/new-overlay-interface)

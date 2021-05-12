@@ -8,7 +8,6 @@
     "exampleHiddenString": "some string value"
   },
   "dev": {
-    "overlayUrl": "http://localhost:3000",
     "exampleString": "some string value",
     "exampleHiddenString": "some string value"
   }
