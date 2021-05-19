@@ -117,4 +117,4 @@ You will see your module in the list of development module. Here you can start d
 
 #### Here is an example:
 
-![video](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/video/ex00-master.gif)
+![ex00-2-master](https://user-images.githubusercontent.com/43613968/118811618-e249a280-b8b5-11eb-90f6-b66b85646a3f.gif)
