@@ -1,7 +1,7 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.1.0",
-  "description": "Template project of dapplet",
+  "name": "nestedctxs",
+  "version": "0.2.0",
+  "description": "Nested ctxs",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
@@ -12,7 +12,7 @@
   "author": "Dapplets Project",
   "license": "MIT",
   "devDependencies": {
-    "@dapplets/dapplet-extension": "latest",
+    "@dapplets/dapplet-extension": "develop",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",

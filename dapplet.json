@@ -3,7 +3,7 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "FEATURE",
-  "title": "Dapplet Template",
+  "title": "Nested ctxs",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/icon64.png",
@@ -13,6 +13,6 @@
     "default": "config/default.json"
   },
   "dependencies": {
-    "twitter-adapter.dapplet-base.eth": "0.5.1"
+    "twitter-adapter.dapplet-base.eth": "0.9.0"
   }
 }
