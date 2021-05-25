@@ -29,6 +29,21 @@ export default class TwitterFeature {
               exec: (ctx) => console.log('ctx3 = ', ctx),
             },
           ],
+          {
+            RETWEET: (retweetCtx) => [
+              button({
+                initial: 'DEFAULT',
+                DEFAULT: {
+                  label: 'new',
+                  img: EXAMPLE_IMG,
+                  exec: () => {
+                    console.log('tweetCtx = ', ctx);
+                    console.log('retweetCtx = ', retweetCtx)
+                  },
+                },
+              }),
+            ],
+          },
           avatar({
             initial: 'DEFAULT',
             DEFAULT: {
