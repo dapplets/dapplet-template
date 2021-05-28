@@ -1,5 +1,7 @@
 import {} from '@dapplets/dapplet-extension';
 import EXAMPLE_IMG from './icons/icon19.png';
+import DARK from './icons/icon19_dark.png';
+import LIGHT from './icons/icon19_light.png';
 import BIG_IMG from './icons/icon64.png';
 
 @Injectable
@@ -8,21 +10,41 @@ export default class TwitterFeature {
   @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
   
   activate() {
-    const { badge, label, button, picture } = this.adapter.exports;
+    const { avatarBadge, usernameBadge, label, button, picture, caption } = this.adapter.exports;
     const config = {
-      // TIMELINE: async (timelineCtx, me) => {
-        // ...userData = await Server.get();
-        TWEET: (ctx, me) => [
-          // ...tweetData = await Server.get(userData);
-          badge({
+        POST: (ctx) => [
+          // STARTER
+          [
+            {
+              label: 'Add tweet to the Ethereum registry',
+              exec: (ctx) => console.log('ctx1 = ', ctx),
+            },
+            {
+              label: 'Add tweet to the NEAR registry',
+              exec: (ctx) => console.log('ctx2 = ', ctx),
+            },
+            {
+              label: 'Add tweet to the Swarm',
+              exec: (ctx) => console.log('ctx3 = ', ctx),
+            },
+          ],
+          usernameBadge({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              img: { DARK, LIGHT },
+              exec: () => {
+                console.log('ctx = ', ctx);
+              },
+            },
+          }),
+          avatarBadge({
             initial: 'DEFAULT',
             DEFAULT: {
               vertical: 'bottom',
               horizontal: 'right',
-              img: EXAMPLE_IMG,
+              img: { DARK, LIGHT },
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
@@ -32,8 +54,7 @@ export default class TwitterFeature {
               label: 'new',
               img: EXAMPLE_IMG,
               exec: () => {
-                console.log('ctx = ', ctx);
-                console.log('me = ', me);
+                $(ctx, 'pic').hidden = !$(ctx, 'pic').hidden;
               },
             },
           }),
@@ -45,19 +66,38 @@ export default class TwitterFeature {
               text: 'new label',
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
           picture({
+            id: 'pic',
             initial: 'DEFAULT',
             DEFAULT: {
               img: BIG_IMG,
             },
           }),
+          caption({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              img: EXAMPLE_IMG,
+              text: 'new caption',
+              exec: () => {
+                console.log('ctx = ', ctx);
+              },
+            },
+          }),
         ],
-        PROFILE: async (ctx, me) => [
-          badge({
+        PROFILE: async (ctx) => [
+          usernameBadge({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              img: BIG_IMG,
+              exec: () => {
+                console.log('ctx = ', ctx);
+              },
+            },
+          }),
+          avatarBadge({
             initial: 'DEFAULT',
             DEFAULT: {
               vertical: 'bottom',
@@ -65,7 +105,6 @@ export default class TwitterFeature {
               img: BIG_IMG,
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
@@ -76,7 +115,6 @@ export default class TwitterFeature {
               label: 'new#1',
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
@@ -87,79 +125,33 @@ export default class TwitterFeature {
               label: 'new#2',
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
         ],
-
-        // old design support
-        PROFILE_AVATAR_BADGE: async (ctx, me) => [
-          badge({
+        SUSPENDED: (ctx) => [
+          usernameBadge({
             initial: 'DEFAULT',
             DEFAULT: {
-              vertical: 'bottom',
-              horizontal: 'left',
               img: BIG_IMG,
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
         ],
-        POST_SOUTH: async (ctx, me) => [
-          button({
+        HEADING: (ctx) => [
+          usernameBadge({
             initial: 'DEFAULT',
             DEFAULT: {
-              label: 'old#1',
-              img: EXAMPLE_IMG,
+              img: BIG_IMG,
               exec: () => {
                 console.log('ctx = ', ctx);
-                console.log('me = ', me);
-              },
-            },
-          }),
-          button({
-            initial: 'DEFAULT',
-            DEFAULT: {
-              label: 'old#2',
-              img: EXAMPLE_IMG,
-              exec: () => {
-                console.log('ctx = ', ctx);
-                console.log('me = ', me);
               },
             },
           }),
         ],
-        PROFILE_BUTTON_GROUP: async (ctx, me) => [
-          button({
-            initial: 'DEFAULT',
-            DEFAULT: {
-              label: 'old',
-              img: EXAMPLE_IMG,
-              exec: () => {
-                console.log('ctx = ', ctx);
-                console.log('me = ', me);
-              },
-            },
-          }),
-        ],
-        POST_USERNAME_LABEL: async (ctx, me) => 
-          label({
-            initial: 'DEFAULT',
-            DEFAULT: {
-              basic: true,
-              img: EXAMPLE_IMG,
-              text: 'old label',
-              exec: () => {
-                console.log('ctx = ', ctx);
-                console.log('me = ', me);
-              },
-            },
-          }),
-      //}
     };
-    this.adapter.attachConfig(config);
+    const { $ } = this.adapter.attachConfig(config);
   }
 }
