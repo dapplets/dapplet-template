@@ -3,6 +3,7 @@ import EXAMPLE_IMG from './icons/icon19.png';
 import DARK from './icons/icon19_dark.png';
 import LIGHT from './icons/icon19_light.png';
 import BIG_IMG from './icons/icon64.png';
+import BOY from './icons/uzumaki.jpeg';
 
 @Injectable
 export default class TwitterFeature {
@@ -10,7 +11,7 @@ export default class TwitterFeature {
   @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
   
   activate() {
-    const { avatarBadge, usernameBadge, label, button, picture, caption } = this.adapter.exports;
+    const { avatar, avatarBadge, usernameBadge, label, button, picture, caption } = this.adapter.exports;
     const config = {
         POST: (ctx) => [
           // STARTER
@@ -28,6 +29,12 @@ export default class TwitterFeature {
               exec: (ctx) => console.log('ctx3 = ', ctx),
             },
           ],
+          avatar({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              img: BOY,
+            },
+          }),
           usernameBadge({
             initial: 'DEFAULT',
             DEFAULT: {
@@ -88,6 +95,15 @@ export default class TwitterFeature {
           }),
         ],
         PROFILE: async (ctx) => [
+          avatar({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              img: BOY,
+              exec: () => {
+                console.log('ctx = ', ctx);
+              },
+            },
+          }),
           usernameBadge({
             initial: 'DEFAULT',
             DEFAULT: {
