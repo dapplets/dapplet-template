@@ -146,6 +146,15 @@ export default class TwitterFeature {
           }),
         ],
         SUSPENDED: (ctx) => [
+          avatar({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              img: BOY,
+              exec: () => {
+                console.log('ctx = ', ctx);
+              },
+            },
+          }),
           usernameBadge({
             initial: 'DEFAULT',
             DEFAULT: {
