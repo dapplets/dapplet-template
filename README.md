@@ -1,5 +1,7 @@
 # Getting Started
 
+[![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
+
 To run the simpliest dapplet, follow these steps.
 
 #### 1. Clone [Dapplet Template](https://github.com/dapplets/dapplet-template) repository locally.
