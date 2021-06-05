@@ -1,5 +1,7 @@
 # Example 01: Extra button on Twitter Adapter
 
+[![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template/tree/ex01-add-button-exercise)
+
 The **basic template** for `your_dapplet/src/index.ts` looks like this:
 
 ```typescript
