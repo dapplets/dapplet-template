@@ -14,7 +14,7 @@ export default class TwitterFeature {
     const { avatar, avatarBadge, usernameBadge, label, button, picture, caption } = this.adapter.exports;
     const config = {
       /* This is also the correct way to use it:
-      REPOST: (repostCtx) => [
+      QUOTE_POST: (repostCtx) => [
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -30,7 +30,7 @@ export default class TwitterFeature {
       */
       POST: (ctx) => [
         {
-          REPOST: (repostCtx) => [
+          QUOTE_POST: (repostCtx) => [
             button({
               initial: 'DEFAULT',
               DEFAULT: {
