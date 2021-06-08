@@ -28,7 +28,7 @@ export default class TwitterFeature {
         }),
       ],
       */
-      POST: (ctx) => [
+      POST: async (ctx) => ctx.id === '1402271141058826255' ? [
         {
           QUOTE_POST: (repostCtx) => [
             button({
@@ -37,12 +37,25 @@ export default class TwitterFeature {
                 label: 'repost',
                 img: EXAMPLE_IMG,
                 exec: () => {
+                  console.log('ctx = ', ctx)
                   console.log('repostCtx = ', repostCtx)
                   console.log('parent ctx = ', repostCtx.parent)
                 },
               },
             }),
-          ],
+            button({
+              initial: 'DEFAULT',
+              DEFAULT: {
+                label: 'repost#2',
+                img: EXAMPLE_IMG,
+                exec: () => {
+                  console.log('ctx = ', ctx)
+                  console.log('repostCtx = ', repostCtx)
+                  console.log('parent ctx = ', repostCtx.parent)
+                },
+              },
+            }),
+          ]
         },
         // STARTER
         [
@@ -123,6 +136,37 @@ export default class TwitterFeature {
             },
           },
         }),
+      ] : [
+        {
+          QUOTE_POST: (repostCtx) => [
+            button({
+              initial: 'DEFAULT',
+              DEFAULT: {
+                label: 're',
+                img: EXAMPLE_IMG,
+                exec: () => {
+                  console.log('ctx = ', ctx)
+                  console.log('repostCtx = ', repostCtx)
+                  console.log('parent ctx = ', repostCtx.parent)
+                },
+              },
+            })
+          ]
+        },
+        [
+          {
+            label: 'Add tweet to the Ethereum registry',
+            exec: (ctx) => console.log('ctx1 = ', ctx),
+          },
+          {
+            label: 'Add tweet to the NEAR registry',
+            exec: (ctx) => console.log('ctx2 = ', ctx),
+          },
+          {
+            label: 'Add tweet to the Swarm',
+            exec: (ctx) => console.log('ctx3 = ', ctx),
+          },
+        ],
       ],
       PROFILE: async (ctx) => [
         avatar({
