@@ -12,10 +12,10 @@ export default class TwitterFeature {
     const { button, picture } = this.adapter.exports;
     // LP end
     // $ returns object "me". Use it to change state or params of the other element
-    // Example 1: exec: (ctx) => $(ctx, 'another_el_id').state = 'SECOND'
-    // Example 2: exec: (ctx) => $(ctx, 'another_el_id').label = 'Hello'
+    // Example 1: exec: () => $(ctx, 'another_el_id').state = 'SECOND'
+    // Example 2: exec: () => $(ctx, 'another_el_id').label = 'Hello'
     const { $ } = this.adapter.attachConfig({
-      POST_SOUTH: [
+      POST: (ctx) => [
         button({
           id: 'button',
           initial: 'DEFAULT',
@@ -23,15 +23,13 @@ export default class TwitterFeature {
             label: 'FAKE',
             img: BADGE_IMG,
             // LP: 2. Toggle the state “hidden/shown” of the picture on button click
-            exec: (ctx) => {
+            exec: () => {
               $(ctx, 'pic').hidden = !$(ctx, 'pic').hidden;
             },
             // LP end
           },
         }),
-      ],
-      // LP: 1. Add extra picture to POST_PICTURE
-      POST_PICTURE: [
+        // LP: 1. Add extra picture to POST_PICTURE
         picture({
           id: 'pic',
           initial: 'DEFAULT',
