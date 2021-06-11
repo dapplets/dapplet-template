@@ -9,22 +9,27 @@ export default class TwitterFeature {
   private _currentAddress: string | null = null;
   private _transferAmount = '0x1BC16D674EC80000';
   // LP end
-  constructor(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-    @Inject('twitter-adapter.dapplet-base.eth') public adapter: any,
-  ) {
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
+  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
+
+  activate() {
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
-      POST_SOUTH: [
+      POST: (ctx) => [
         button({
           initial: 'DEFAULT',
           DEFAULT: {
             label: 'Connect',
             img: EXAMPLE_IMG,
             // LP: 1. Open wallet
-            exec: async (ctx, me) => {
+            exec: async (_, me) => {
               me.state = 'PENDING';
-              this.wallet = this.wallet || (await Core.wallet());
+              if (!this.wallet) {
+                this.wallet = await Core.wallet({ type: 'ethereum', network: 'rinkeby' });
+                const isWalletConnected = await this.wallet.isConnected();
+                if (!isWalletConnected) await this.wallet.connect();
+              }
               this.wallet.sendAndListen('eth_accounts', [], {
                 result: (op, { data }) => {
                   this._currentAddress = data[0];
@@ -38,7 +43,7 @@ export default class TwitterFeature {
           CONNECTED: {
             label: `Send ${BigInt(this._transferAmount) / BigInt(1000000000000000000)} ETH`,
             img: EXAMPLE_IMG,
-            exec: async (ctx, me) => {
+            exec: async (_, me) => {
               // LP: 3. Send the necessary data to wallet and listen for the answer.
               this.wallet.sendAndListen(
                 'eth_sendTransaction',
@@ -67,7 +72,7 @@ export default class TwitterFeature {
           REGECTED: {
             label: 'Rejected',
             img: EXAMPLE_IMG,
-            exec: (ctx, me) => (me.state = 'CONNECTED'),
+            exec: (_, me) => (me.state = 'CONNECTED'),
           },
           MINING: {
             label: 'Mining',
@@ -76,12 +81,12 @@ export default class TwitterFeature {
           COMPLETED: {
             label: 'Completed',
             img: EXAMPLE_IMG,
-            exec: (ctx, me) => (me.state = 'CONNECTED'),
+            exec: (_, me) => (me.state = 'CONNECTED'),
           },
           UNAVAILABLE: {
             label: 'Not available',
             img: EXAMPLE_IMG,
-            exec: (ctx, me) => (me.state = 'CONNECTED'),
+            exec: (_, me) => (me.state = 'CONNECTED'),
           },
           // LP end
         }),
