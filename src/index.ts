@@ -7,30 +7,17 @@ import BOY from './icons/uzumaki.jpeg';
 
 @Injectable
 export default class TwitterFeature {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
   
-  activate() {
+  constructor(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
+  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any
+  ) {
     const { avatar, avatarBadge, usernameBadge, label, button, picture, caption } = this.adapter.exports;
     const config = {
-      /* This is also the correct way to use it:
-      QUOTE_POST: (repostCtx) => [
-        button({
-          initial: 'DEFAULT',
-          DEFAULT: {
-            label: 'repost',
-            img: EXAMPLE_IMG,
-            exec: () => {
-              console.log('repostCtx = ', repostCtx)
-              console.log('parent ctx = ', repostCtx.parent)
-            },
-          },
-        }),
-      ],
-      */
-      POST: async (ctx) => ctx.id === '1402271141058826255' ? [
+      POST: async (ctx) => //ctx.id === '1402271141058826255' ? [
+        [
         {
-          QUOTE_POST: (repostCtx) => [
+          QUOTE_POST: async (repostCtx) => [
             button({
               initial: 'DEFAULT',
               DEFAULT: {
@@ -57,7 +44,6 @@ export default class TwitterFeature {
             }),
           ]
         },
-        // STARTER
         [
           {
             label: 'Add tweet to the Ethereum registry',
@@ -136,13 +122,44 @@ export default class TwitterFeature {
             },
           },
         }),
-      ] : [
-        {
+      ] /*: (
+        (Math.floor(Date.now() / 10000) % 2 === 0) ? [
+          {
+            QUOTE_POST: (repostCtx) => [
+              button({
+                initial: 'DEFAULT',
+                DEFAULT: {
+                  label: 're',
+                  img: EXAMPLE_IMG,
+                  exec: () => {
+                    console.log('ctx = ', ctx)
+                    console.log('repostCtx = ', repostCtx)
+                    console.log('parent ctx = ', repostCtx.parent)
+                  },
+                },
+              })
+            ]
+          },
+          [
+            {
+              label: 'Add tweet to the Ethereum registry',
+              exec: (ctx) => console.log('ctx1 = ', ctx),
+            },
+            {
+              label: 'Add tweet to the NEAR registry',
+              exec: (ctx) => console.log('ctx2 = ', ctx),
+            },
+            {
+              label: 'Add tweet to the Swarm',
+              exec: (ctx) => console.log('ctx3 = ', ctx),
+            },
+          ],
+        ] : [{
           QUOTE_POST: (repostCtx) => [
             button({
               initial: 'DEFAULT',
               DEFAULT: {
-                label: 're',
+                label: 'variant 3',
                 img: EXAMPLE_IMG,
                 exec: () => {
                   console.log('ctx = ', ctx)
@@ -152,22 +169,8 @@ export default class TwitterFeature {
               },
             })
           ]
-        },
-        [
-          {
-            label: 'Add tweet to the Ethereum registry',
-            exec: (ctx) => console.log('ctx1 = ', ctx),
-          },
-          {
-            label: 'Add tweet to the NEAR registry',
-            exec: (ctx) => console.log('ctx2 = ', ctx),
-          },
-          {
-            label: 'Add tweet to the Swarm',
-            exec: (ctx) => console.log('ctx3 = ', ctx),
-          },
-        ],
-      ],
+        }]
+      )*/,
       PROFILE: async (ctx) => [
         avatar({
           initial: 'DEFAULT',
