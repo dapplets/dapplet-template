@@ -3,13 +3,13 @@ import EXAMPLE_IMG from './icons/icon19.png';
 
 @Injectable
 export default class TwitterFeature {
-  constructor(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-    @Inject('twitter-adapter.dapplet-base.eth') public adapter: any,
-  ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
+  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
+
+  activate() {
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
-      POST_SOUTH: [
+      POST: (ctx) =>
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -18,7 +18,7 @@ export default class TwitterFeature {
             // LP:  1. Implement overlay opening on button click
             //      2. Send some data to overlay and get collback 'onClick'
             //      3. In callback increse current counter and add received message to label
-            exec: async (ctx, me) => {
+            exec: async (_, me) => {
               const overlayUrl = await Core.storage.get('overlayUrl');
               const overlay = Core.overlay({ url: overlayUrl, title: 'Overlay' });
               overlay.sendAndListen('data', 'Hello, World!', {
@@ -31,7 +31,6 @@ export default class TwitterFeature {
             // LP end
           },
         }),
-      ],
     });
   }
 }
