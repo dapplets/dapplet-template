@@ -15,7 +15,7 @@ export default class TwitterFeature {
     // LP End
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
-      POST_SOUTH: [
+      POST: (ctx) =>
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -25,11 +25,10 @@ export default class TwitterFeature {
             // LP end
             // LP: 2. Listen for the button click - output into console.
             //     3: Make counter incrementing on button click.
-            exec: (ctx) => server.send('increment', ctx.id),
+            exec: () => server.send('increment', ctx.id),
             // LP end
           },
         }),
-      ],
     });
   }
 }
