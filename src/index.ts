@@ -15,7 +15,7 @@ export default class TwitterFeature {
     // LP End
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
-      POST_SOUTH: [
+      POST: (ctx) =>
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -25,7 +25,7 @@ export default class TwitterFeature {
             // LP end
             // LP: 2. Listen for the button click - output into console.
             //     3: Make counter incrementing on button click.
-            exec: async (ctx, me) => {
+            exec: async (_, me) => {
               console.log(ctx);
               console.log(me);
               me.label += 1;
@@ -36,7 +36,6 @@ export default class TwitterFeature {
             // LP end
           },
         }),
-      ],
     });
   }
 }
