@@ -6,8 +6,7 @@ import EXAMPLE_IMG from './icons/icon19.png';
 export default class TwitterFeature {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-  @Inject('twitter-adapter.dapplet-base.eth') 
-  public adapter: any;
+  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
 
   // LP: define variables `wallet`, `_currentAddress` and `_transferAmount`
 
