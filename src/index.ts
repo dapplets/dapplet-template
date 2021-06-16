@@ -7,15 +7,109 @@ import BOY from './icons/uzumaki.jpeg';
 
 @Injectable
 export default class TwitterFeature {
+  private config: any;
   
   constructor(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
   @Inject('twitter-adapter.dapplet-base.eth') public adapter: any
   ) {
     const { avatar, avatarBadge, usernameBadge, label, button, picture, caption } = this.adapter.exports;
-    const config = {
-      POST: async (ctx) => //ctx.id === '1402271141058826255' ? [
-        [
+
+    const config2 = {
+      POST: async (ctx) => [
+        avatar({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: BOY,
+          },
+        }),
+        usernameBadge({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: { DARK, LIGHT },
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+        avatarBadge({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            vertical: 'bottom',
+            horizontal: 'right',
+            img: { DARK, LIGHT },
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+        label({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            basic: true,
+            img: EXAMPLE_IMG,
+            text: 'label',
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+      ],
+      PROFILE: async (ctx) => [
+        avatar({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: BOY,
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+        usernameBadge({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: BIG_IMG,
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+        avatarBadge({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            vertical: 'bottom',
+            horizontal: 'right',
+            img: BIG_IMG,
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+        button({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: BIG_IMG,
+            label: 'button#1',
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+        button({
+          initial: 'DEFAULT',
+          DEFAULT: {
+            img: BIG_IMG,
+            label: 'button#2',
+            exec: () => {
+              console.log('ctx = ', ctx);
+            },
+          },
+        }),
+      ],
+    };
+
+    this.config = {
+      POST: async (ctx) => [
         {
           QUOTE_POST: async (repostCtx) => [
             button({
@@ -207,7 +301,8 @@ export default class TwitterFeature {
             img: BIG_IMG,
             label: 'button#1',
             exec: () => {
-              console.log('ctx = ', ctx);
+              console.log('this.config = ', this.config);
+              this.adapter.resetConfig(this.config, config2);
             },
           },
         }),
@@ -217,7 +312,8 @@ export default class TwitterFeature {
             img: BIG_IMG,
             label: 'button#2',
             exec: () => {
-              console.log('ctx = ', ctx);
+              console.log('this.config = ', this.config);
+              this.adapter.resetConfig(this.config, config2);
             },
           },
         }),
@@ -254,6 +350,6 @@ export default class TwitterFeature {
         }),
       ],
     };
-    const { $ } = this.adapter.attachConfig(config);
+    const { $ } = this.adapter.attachConfig(this.config);
   }
 }
