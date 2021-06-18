@@ -35,7 +35,6 @@ export class Button {
   public static contextInsPoints = {
     MENU: 'MENU',
     SEARCH_RESULT: 'SEARCH_RESULT',
-    DAPPLET_SEARCH_RESULT: 'DAPPLET_SEARCH_RESULT',
   }
 
   public mount(): void {
@@ -98,8 +97,7 @@ export class Button {
       this.el = document.createElement('li');
       this.el.classList.add('dapplet-widget-menu');
     } else if (
-      this.insPointName === 'SEARCH_RESULT' ||
-      this.insPointName === 'DAPPLET_SEARCH_RESULT'
+      this.insPointName === 'SEARCH_RESULT'
     ) {
       this.el = document.createElement('div');
       this.el.classList.add('dapplet-widget-results');

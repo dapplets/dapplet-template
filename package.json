@@ -1,11 +1,11 @@
 {
-  "name": "example10newvirtualarapter",
+  "name": "simple-yahoo-example",
   "version": "0.1.0",
-  "description": "Example 10: New virtual adapter",
+  "description": "Simple Yahoo Example",
   "main": "index.js",
   "scripts": {
-    "postinstall": "concurrently -c \"yellow,magenta,green,blue\" -n \"google-adapter,yahoo-adapter,dapplet,my-virtual-adapter\" \"cd google-adapter && npm i\" \"cd yahoo-adapter && npm i\" \"cd dapplet-feature && npm i\" \"cd my-virtual-adapter && npm i\"",
-    "start": "concurrently -c \"yellow,magenta,green,blue\" -n \"google-adapter,yahoo-adapter,dapplet,my-virtual-adapter\" \"cd google-adapter && npm start\" \"cd yahoo-adapter && npm start\" \"cd dapplet-feature && npm start\" \"cd my-virtual-adapter && npm start\"",
+    "postinstall": "concurrently -c \"yellow,magenta\" -n \"yahoo-adapter,dapplet\" \"cd yahoo-adapter && npm i\" \"cd dapplet-feature && npm i\"",
+    "start": "concurrently -c \"yellow,magenta\" -n \"yahoo-adapter,dapplet\" \"cd yahoo-adapter && npm start\" \"cd dapplet-feature && npm start\"",
     "prettify": "npx prettier --write .",
     "lint": "npx eslint ."
   },
@@ -20,7 +20,7 @@
     "url": "https://github.com/dapplets/dapplet-template/issues"
   },
   "devDependencies": {
-    "@dapplets/dapplet-extension": "latest",
+    "@dapplets/dapplet-extension": "develop",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",

@@ -3,16 +3,16 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "FEATURE",
-  "title": "Dapplet Template",
+  "title": "Simple Yahoo Example",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/icon64.png",
-  "contextIds": ["my-virtual-adapter.dapplet-base.eth"],
+  "contextIds": ["yahoo-adapter.dapplet-base.eth"],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
   },
   "dependencies": {
-    "my-virtual-adapter.dapplet-base.eth": "0.1.0"
+    "yahoo-adapter.dapplet-base.eth": "0.1.0"
   }
 }
