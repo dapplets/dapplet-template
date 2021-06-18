@@ -32,6 +32,12 @@ export class Button {
   public state: IButtonState;
   insPointName: string;
 
+  public static contextInsPoints = {
+    MENU: 'MENU',
+    SEARCH_RESULT: 'SEARCH_RESULT',
+    DAPPLET_SEARCH_RESULT: 'DAPPLET_SEARCH_RESULT',
+  }
+
   public mount(): void {
     if (!this.el) this._createElement();
     if (!stylesAdded) {

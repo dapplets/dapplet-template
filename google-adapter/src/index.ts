@@ -17,8 +17,8 @@ export default class GoogleAdapter {
     result: this.adapter.createWidgetFactory(Result),
   });
 
-  public config = [
-    {
+  public config = {
+    MENU: {
       containerSelector: '#cnt, .ndYZfc',
       contextSelector: '#top_nav, .jZWadf',
       insPoints: {
@@ -32,9 +32,9 @@ export default class GoogleAdapter {
         insertPoint: '#rcnt, .mJxzWe',
       }),
     },
-    {
+    SEARCH_RESULT: {
       containerSelector: '#search',
-      contextSelector: '.hlcw0c .tF2Cxc',
+      contextSelector: '#rso > .g > div > .tF2Cxc, #rso > div > .g > div > .tF2Cxc',
       insPoints: {
         SEARCH_RESULT: {
           selector: '.yuRUbf',
@@ -49,7 +49,7 @@ export default class GoogleAdapter {
         description: searchNode.querySelector('.IsZvec').textContent,
       }),
     },
-    {
+    DAPPLET_SEARCH_RESULT: {
       containerSelector: '#search',
       contextSelector: '.hlcw0c-dapp .tF2Cxc',
       insPoints: {
@@ -66,7 +66,7 @@ export default class GoogleAdapter {
         description: searchNode.querySelector('.IsZvec').textContent,
       }),
     },
-    {
+    WIDGETS: {
       containerSelector: '#search',
       contextSelector: '#rso',
       insPoints: {
@@ -79,7 +79,7 @@ export default class GoogleAdapter {
         id: '',
       }),
     },
-  ];
+  };
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any

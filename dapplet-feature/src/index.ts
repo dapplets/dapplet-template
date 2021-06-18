@@ -33,13 +33,13 @@ const searchResults = [
 
 @Injectable
 export default class GoogleFeature {
-  constructor(
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Inject('my-virtual-adapter.dapplet-base.eth') public adapter: any,
-  ) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  @Inject('my-virtual-adapter.dapplet-base.eth') public adapter: any;
+
+  activate() {
     const { button, result } = this.adapter.exports;
     this.adapter.attachConfig({
-      MENU: [
+      MENU: () => [
         button({
           initial: 'RESULTS',
           RESULTS: {
@@ -76,7 +76,7 @@ export default class GoogleFeature {
           },
         }),
       ],
-      SEARCH_RESULT: [
+      SEARCH_RESULT: () => [
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -90,7 +90,7 @@ export default class GoogleFeature {
           },
         }),
       ],
-      WIDGETS: [
+      WIDGETS: () => [
         result({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -100,7 +100,7 @@ export default class GoogleFeature {
           },
         }),
       ],
-      DAPPLET_SEARCH_RESULT: [
+      DAPPLET_SEARCH_RESULT: () => [
         button({
           initial: 'DEFAULT',
           DEFAULT: {

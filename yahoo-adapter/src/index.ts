@@ -18,8 +18,8 @@ export default class YahooAdapter {
   });
 
   // LP: 1. implement communication between dapplets and pages
-  public config = [
-    {
+  public config = {
+    MENU: {
       containerSelector: '#doc',
       contextSelector: '#ys',
       insPoints: {
@@ -33,7 +33,7 @@ export default class YahooAdapter {
         insertPoint: '#bd',
       }),
     },
-    {
+    SEARCH_RESULT: {
       containerSelector: '#left',
       contextSelector: '.relsrch',
       insPoints: {
@@ -50,7 +50,7 @@ export default class YahooAdapter {
         description: searchNode.querySelector('.compText, .compList').textContent,
       }),
     },
-    {
+    DAPPLET_SEARCH_RESULT: {
       containerSelector: '#dapplet-search-widget',
       contextSelector: '.relsrch-dapp',
       insPoints: {
@@ -68,7 +68,7 @@ export default class YahooAdapter {
       }),
     },
     // LP: 6. Add new insertion point WIDGETS on the top of Google widgets.
-    {
+    WIDGETS: {
       containerSelector: '#left',
       contextSelector: '#main',
       insPoints: {
@@ -82,7 +82,7 @@ export default class YahooAdapter {
       }),
     },
     // LP end
-  ];
+  };
   // LP end
 
   constructor(

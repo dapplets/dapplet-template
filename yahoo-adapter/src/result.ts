@@ -20,6 +20,10 @@ export class Result {
   public el: HTMLElement;
   public state: IResultState;
 
+  public static contextInsPoints = {
+    WIDGETS: 'WIDGETS',
+  }
+
   public mount(): void {
     if (!this.el) this._createElement();
 
