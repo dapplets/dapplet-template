@@ -1,6 +1,6 @@
 {
   "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Template project of dapplet",
   "main": "lib/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "author": "Dapplets Project",
   "license": "MIT",
   "devDependencies": {
-    "@dapplets/dapplet-extension": "latest",
+    "@dapplets/dapplet-extension": "develop",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",

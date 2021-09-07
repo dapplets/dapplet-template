@@ -9,7 +9,7 @@ export default class TwitterFeature {
   activate() {
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
-      POST: (ctx) => [
+      POST: () =>
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -18,7 +18,6 @@ export default class TwitterFeature {
             exec: () => alert('Hello, World!'),
           },
         }),
-      ],
     });
   }
 }
