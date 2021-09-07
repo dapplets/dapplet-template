@@ -6,10 +6,6 @@ To run the simpliest dapplet, follow these steps.
 
 #### 1. Clone [Dapplet Template](https://github.com/dapplets/dapplet-template) repository locally.
 
-```bash
-git clone git@github.com:dapplets/dapplet-template.git
-```
-
 #### 2. Change module name from "dapplet-template.dapplet-base.eth" to yours in `package.json` file.
 
 #### 3. Fill in fields in the manifests `package.json` and `dapplet.json`.
@@ -56,7 +52,7 @@ The list of our adapters are available now:
 
 #### 8. Specify the argument of `@Inject` decorator with chosen adapter in the `/src/index.ts` module and add method `activate()` with the simple dapplet code.
 
-```js
+```typescript
 import {} from '@dapplets/dapplet-extension';
 import EXAMPLE_IMG from './icons/icon19.png';
 
@@ -68,7 +64,7 @@ export default class TwitterFeature {
   activate() {
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
-      POST_SOUTH: [
+      POST: () =>
         button({
           initial: 'DEFAULT',
           DEFAULT: {
@@ -77,7 +73,6 @@ export default class TwitterFeature {
             exec: () => alert('Hello, World!'),
           },
         }),
-      ],
     });
   }
 }
@@ -107,15 +102,15 @@ The address [http://localhost:3001/dapplet.json](http://localhost:3001/dapplet.j
 
 Paste URL to Developer tab of Dapplet Extension's popup and click **Add**.
 
-![Developer tab of Extension](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/img/gs_1.jpg)
+![image](https://user-images.githubusercontent.com/43613968/132354395-7121d255-0eef-4526-b550-5eed8908436a.png)
 
 You will see your module in the list of development module. Here you can start deployment process.
 
-![Developer tab of Extension](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/img/gs_2.jpg)
+![image](https://user-images.githubusercontent.com/43613968/132354513-763b3dba-b137-45e3-a44f-987a18bda655.png)
 
 #### 12. Run your dapplet in the website.
 
-![Developer tab of Extension](https://raw.githubusercontent.com/dapplets/dapplet-docs/master/static/img/gs_3.jpg)
+![image](https://user-images.githubusercontent.com/43613968/132354570-3cc9d4c9-c9f0-4bb0-9825-74b9c1c66a4c.png)
 
 #### Here is an example:
 
