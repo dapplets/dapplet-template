@@ -40,7 +40,7 @@ The list of our adapters are available now:
 - [identity-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/identity-adapter) - virtual adapter (interface), which is an abstract of two adapters above;
 - [common-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/common-adapter) - viewport adapter is universal adapter which contains generic insertion points and is compatible with any web-sites.
 
-> See for more [here.](https://github.com/dapplets/dapplet-docs/tree/master/docs/adapters-docs-list)
+> See for more [here.](https://docs.dapplets.org/docs/adapters-docs-list)
 
 #### 7. Fill in `contextIds` section of the `dapplet.json` file.
 
@@ -78,7 +78,7 @@ export default class TwitterFeature {
 }
 ```
 
-#### 9. Install the Dapplet Extension for you Chrome browser (if not installed) - follow the [Installation](https://github.com/dapplets/dapplet-docs/tree/master/docs/installation) steps.
+#### 9. Install the Dapplet Extension for you Chrome browser (if not installed) - follow the [Installation](https://docs.dapplets.org/docs/installation) steps.
 
 #### 10. Install dependencies and run the code:
 ```bash
