@@ -6,7 +6,7 @@
   "title": "Dapplet Template",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
-  "icon": "src/icons/icon64.png",
+  "icon": "src/icons/dapplet-icon.png",
   "contextIds": ["twitter-adapter.dapplet-base.eth"],
   "config": {
     "schema": "config/schema.json",

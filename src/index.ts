@@ -1,5 +1,5 @@
 import {} from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/icon19.png';
+import EXAMPLE_IMG from './icons/dapplet-icon.png';
 
 @Injectable
 export default class TwitterFeature {

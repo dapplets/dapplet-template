@@ -12,9 +12,7 @@ To run the simpliest dapplet, follow these steps.
 
 #### 4. Change icons to yours in `src/icons` folder.
 
-The icon `src/icon19.png` is used for the injected button in source code `src/index.ts`.
-
-The icon `src/icon64.png` is used for display in the store of Dapplets. The link to this icon is defined in `dapplet.json` manifest.
+The icon `src/dapplet-icon.png` is used for the injected button in source code `src/index.ts` and for display in the store of Dapplets. The link to this icon is defined in `dapplet.json` manifest.
 
 #### 5. Edit necessary Dapplet settings in the `config/schema.json` file.
    The default values of settings are defined in `config/default.json` file.
@@ -54,7 +52,7 @@ The list of our adapters are available now:
 
 ```typescript
 import {} from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/icon19.png';
+import EXAMPLE_IMG from './icons/dapplet-icon.png';
 
 @Injectable
 export default class TwitterFeature {
