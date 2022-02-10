@@ -1,144 +1,173 @@
-<img width="1245" alt="dapplet-template" src="https://user-images.githubusercontent.com/43613968/225052440-437281a8-63c7-44ba-80df-391974396a4b.png">
+# Wallets and smart contracts
 
-# Run Your Dapplet
+This example shows how to work with Ethereum and NEAR wallets and smart-contracts via new Core Login API.
 
-To run a basic dapplet, follow these steps.
+Here is the initial code for this example: [`ex14-core-login-exercise`](https://github.com/dapplets/dapplet-template/tree/ex14-core-login-exercise).
 
-#### 1. Choose the environment to start the project. There are three ways:
+### Introduction to Core Login API
 
-1. Run the dapplet using **Gitpod**. It is the easiest way to launch **the remotely located dapplet** into the web-browser and try to work with it:
+The Core Login API is developed as a replacement of `Core.wallet()` and `Core.contract()` functions. It provides two functions to manage Login Sessions:
 
-[![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
+- `Core.login()` – creates login sessions for a specified authorization method, during which wallet and contract interaction will take place. It shows a pop-up window for a user where he is able to select a suitable wallet.
+- `Core.sessions()` – returns existing sessions that are not expired, to reuse previous authorization and to avoid showing a login pop-up again.
 
-Gitpod can provide fully initialized, perfectly set-up developer environments for any kind of software project. More about Gitpod you can find on its [official website](https://www.gitpod.io/).
+The `Core.login()` accepts one or more login requests as an input parameter. `LoginRequest` is an object with the following properties:
 
-2. [Create Dapplet App](https://www.npmjs.com/package/create-dapplet-app) is the best way to start building your own dapplet. To create **a local project**, run:
+- `authMethods` (required, `string[]`) – authorization method that affects the list of wallets available for user selection. Depending on the specified authorization method, the functions will return different interfaces for interacting with wallets and contracts (`session.wallet()`, `session.contract()`). Possible values: `ethereum/goerli`, `near/testnet`, `near/mainnet`.
+- `timeout` (optional, `number`, default: 7 days) – amount of time after which the session will become invalid in milliseconds.
+- `role` (optional, `string`) – a name of the set of operations and the operation profile that the user intends to work in. It can be missing if the dapplet works with only one role. The role is displayed in the login pop-up and included in signing messages when the secure mode is enabled. It can be any string. For example: `admin`, `moderator`, `writer` etc.
+- `help` (optional, `string`) – a link to dapplet documentation which is displayed at the message signing step when the secure mode is enabled.
+- `target` (optional, `Overlay`) – an overlay where the login popup window will be displayed. The overlay will be blurry and blocked for user interaction while login process is going.
+- `secureLogin` (optional, `string`, default: `disabled`) – a secure login mode which requires the user to sign a message to confirm wallet ownership. The valid values: `required`, `optional`, `disabled`.
+- `contractId` (optional) – an address of the contract to interact with. Currently used only for NEAR contracts to create a functional key and interact with the contract without confirming each transaction through the wallet. It is important to set the `secureLogin` property to `required`.
+- `from` (optinal, `string`, default: `any`) – a filter that defines which dapplets the login confirmation can be reused from.
 
-```bash
-npx create-dapplet-app
+The `Core.login()` is the asynchronous function which returns `LoginSession` object through which you can call a wallet, a contract, save session info or log out a user. It includes the following asynchronous functions:
+
+- `wallet()` – returns an object for wallet communication.
+- `contract(address, cfg)` – returns an object for contract communication.
+- `isValid()` – checks the validity of the login session according to the set timeout.
+- `getItem(key)` – gets data from the session storage.
+- `setItem(key, value)` – saves a value to the session storage. The value must be of any serializable type.
+- `removeItem(key)` – removes a value from the session storage by key.
+- `clear()` – clears all session storage.
+
+### LP: 1. Log out of all existing sessions
+
+Get all existing login sessions and log out from every of them at the beginning of `activate()` function in the dapplet . In your projects you can reuse sessions using this method.
+
+```typescript
+const sessions = await Core.sessions()
+sessions.forEach((x) => x.logout())
 ```
 
-This method is currently the most advanced and allows you to flexibly configure your project. You can immediately select the type of project, add an adapter, overlay or server to the dapplet.
+### LP: 2. Open overlay if you want to show login pop-up in it
 
-3. You can use this repo as a template for **your GitHub repository**. Use the button on the project page:
+The `overlay.open()` method will open the overlay. An overlay must be opened before logging in if you want to show a pop-up over a blurry overlay.
 
-![Use Template button](https://user-images.githubusercontent.com/79759758/191844612-9615bf33-b93d-4a63-b8db-7a1749fcb3af.png)
-
-#### 2. Change the module name from "dapplet-template.dapplet-base.eth" to your own one in the `package.json` file.
-
-#### 3. Fill in the fields in the following manifests: `package.json` and `dapplet.json`.
-
-In `package.json` set the name, version, description, author and license for your dapp.
-The name is the ID of your dapplet so it must be unique.
-In `dapplet.json` set the title.
-This second manifest is required to deploy the dapplet and add it to the dapplet registry.
-You can find more information about the dapplet manifest [here](https://docs.dapplets.org/docs/manifest).
-
-#### 4. Change the icons to your own ones in the `src/icons` folder.
-
-The icon `src/dapplet-icon.png` is used for the injected button in source code `src/index.ts` and for display in the Dapplets store. The link to this icon is defined in the `dapplet.json` manifest.
-
-#### 5. Edit the necessary Dapplet settings in the `config/schema.json` file.
-
-The default setting values are defined in the `config/default.json` file.
-The schema follows the rules defined in http://json-schema.org/.
-The Dapplet settings UI is generated by [react-jsonschema-form](https://rjsf-team.github.io/react-jsonschema-form/docs/).
-
-There are three environments:
-
-- `dev` - used when a module is loaded from the development server;
-- `test` - used when a module is loaded from the Test Dapplet Registry;
-- `prod` - used when a module is loaded from the Production Dapplet Registry;
-
-More about [Dapplet Config](https://docs.dapplets.org/docs/config).
-
-#### 6. You can use another Adapter in your Dapplet.
-
-Dependencies are defined in the `dependencies` section of the `dapplet.json` file and are injected in the dapplet's `index.ts` file.
-
-The Twitter adapter is used by default.
-
-Here is our list of adapters available at the moment:
-
-- [twitter-config.dapplet-base.eth](https://github.com/dapplets/modules-monorepo/tree/main/packages/adapters/twitter-config) - site-specific adapter for [Twitter](https://twitter.com);
-- [github-config.dapplet-base.eth](https://github.com/dapplets/modules-monorepo/tree/develop/packages/adapters/github-config) - site-specific adapter for [GitHub](https://github.com);
-- [social-virtual-config.dapplet-base.eth](https://github.com/dapplets/modules-monorepo/tree/develop/packages/adapters/social-virtual-config) - virtual adapter (interface) for social networks, which is an abstract of two adapters above.
-
-More about Twitter Adapter you can find [here](https://docs.dapplets.org/docs/adapters-docs-list).
-
-#### 7. Fill in the `contextIds` section of the `dapplet.json` file.
-
-`ContextId` is an identifier of a context to which your module is bound. This is usually the same as the name of an adapter you are using. It may be:
-
-- the name of an adapter you depend on (e.g. `twitter-config.dapplet-base.eth`);
-- the domain name of a website that your dapplet will run on (e.g. `twitter.com`);
-- the identifier of a dynamic context (e.g. `twitter.com/1346093004537425927`).
-
-#### 8. Specify the argument of @Inject decorator with the chosen adapter in the `/src/index.ts` module and add the `activate()` method with a simple dapplet code.
-
-```js
-import {} from '@dapplets/dapplet-extension'
-import EXAMPLE_IMG from './icons/dapplet-icon.png'
-
-@Injectable
-export default class TwitterFeature {
-  @Inject('twitter-config.dapplet-base.eth')
-  public adapter
-
-  activate() {
-    const { button } = this.adapter.exports
-    this.adapter.attachConfig({
-      POST: () =>
-        button({
-          DEFAULT: {
-            label: 'Injected Button',
-            img: EXAMPLE_IMG,
-            exec: () => Core.alert('Hello, World!')
-          }
-        })
-    })
-  }
-}
+```typescript
+this.overlay.open()
 ```
 
-#### 9. Install dependencies and run the code:
+### LP: 3. Create a new Ethereum session or reuse an existing one
+
+If there is no valid session you should create a new one using `Core.login()` function with the `ethereum/goerli` authentication method.
+
+The overlay object can be passed as `target` to open a pop-up over the overlay.
+
+```typescript
+const prevSessions = await Core.sessions()
+const prevSession = prevSessions.find((x) => x.authMethod === 'ethereum/goerli')
+const session =
+  prevSession ?? (await Core.login({ authMethods: ['ethereum/goerli'], target: this.overlay }))
+```
+
+### LP: 4. Ethereum wallet interaction
+
+To interact with the wallet within the established session call the `session.wallet()` method which will return an object similar to the interface proposed in [EIP-1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md).
+
+```typescript
+const wallet = await session.wallet()
+const accountIds = await wallet.request({ method: 'eth_accounts', params: [] })
+console.log('Your Ethereum addresses', accountIds)
+```
+
+### LP: 5. Ethereum contract interaction
+
+In this example we call the contract developed for [Dapplets x Ethereum tutorial](https://github.com/dapplets/dapplets-eth-example). You can find the source code of the contract there. The contract stores a user's posts and returns them.
+
+To interact with contracts you need to create wrapper object with `session.contract()` method. It is similar to the legacy `Core.contract()` interface.
+
+```typescript
+const contract = await session.contract('0x7702aE3E1E0a96A428052BF3E4CB94965F5C0d7F', ABI)
+const posts = await contract.getTweets(accountIds[0]) // read
+console.log('Posts from Ethereum contract', posts)
+await contract.addTweet(JSON.stringify(ctx)) // write
+```
+
+![video](https://github.com/dapplets/dapplet-docs/blob/master/static/video/ex_14_2.gif)
+
+### LP: 6. Open the overlay if you want to show a login pop-up in it
+
+The same like in the LP 2.
+
+```typescript
+this.overlay.open()
+```
+
+### LP: 7. Create a new NEAR session or reuse an existing one
+
+As in the LP 3 we create a login session but using another authentication method: `near/testnet`. We can also set `required` for `secureLogin` and add `contractId` to create a functional key and make the user experience more convenient.
+
+```typescript
+const prevSessions = await Core.sessions()
+const prevSession = prevSessions.find((x) => x.authMethod === 'near/testnet')
+const session =
+  prevSession ??
+  (await Core.login({
+    authMethods: ['near/testnet'],
+    secureLogin: 'required',
+    contractId: 'dev-1634890606019-41631155713650',
+    target: this.overlay,
+  }))
+```
+
+### LP: 8. NEAR wallet interaction
+
+In this case the `session.wallet()` returns the object, wrapping NEAR wallet communication. It uses the `near-api-js` library under the hood and returns `Wallet` object as [described in their documentation](https://github.com/near/near-api-js).
+
+```typescript
+const wallet = await session.wallet()
+console.log('Your NEAR address', wallet.accountId)
+```
+
+### LP: 9. NEAR contract interaction
+
+The similar interface is returned here by `session.contract()`. But the contract methods should be called a little differently.
+
+```typescript
+const contract = await session.contract('dev-1634890606019-41631155713650', {
+  viewMethods: ['getTweets'],
+  changeMethods: ['addTweet', 'removeTweet'],
+})
+
+const posts = await contract.getTweets({ nearId: wallet.accountId }) // read
+console.log('Posts from NEAR contract', posts)
+await contract.addTweet({ tweet: JSON.stringify(ctx) }) // write
+```
+
+If you need to receive the transaction call information, use another approach:
+
+```typescript
+const { account } = await session.contract('dev-1634890606019-41631155713650', {
+  viewMethods: ['getTweets'],
+  changeMethods: ['addTweet', 'removeTweet'],
+})
+
+const result = await account.functionCall({
+  contractId: 'dev-1634890606019-41631155713650',
+  methodName: 'addTweet',
+  args: {
+    tweet: JSON.stringify(ctx),
+  },
+  // gas,              // if you need more than default
+  // attachedDeposit,  // if you need to transfer tokens
+})
+
+console.log('result', result)
+```
+
+Result:
+
+![Transaction result](https://github.com/dapplets/dapplet-docs/blob/master/static/img/core-login-01.png)
+
+Here is the result code of the example: [`ex14-core-login-solution`](https://github.com/dapplets/dapplet-template/tree/ex14-core-login-solution).
+
+Run the dapplet:
 
 ```bash
 npm i
 npm start
 ```
 
-You will see a message like this:
-
-```bash
-rollup v2.38.3
-bundles src/index.ts → lib\index.js...
-Current registry address: http://localhost:3001/dapplet.json
-created lib\index.js in 783ms
-[2021-02-01 13:58:36] waiting for changes...
-```
-
-In this example we use a Rollup bundler to compile modules but you can use whatever you want. Webpack for example.
-
-The address [http://localhost:3001/dapplet.json](http://localhost:3001/dapplet.json) is a link to your dapplet manifest file. Copy it to a clipboard.
-
-#### 10. Connect the development server to the Dapplets Extension.
-
-Paste the URL to the Developer tab of the Dapplet Extension's popup and click **Add**.
-
-![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/7ddf8291-d223-41f2-be9b-a05f5a5e4b8f)
-
-
-> If an error occurs, look [here](https://docs.dapplets.org/docs/publishing).
-
-You will see your module in the list of development modules. Here you can start the deployment process.
-
-![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/b9a6a46d-1e0d-421b-909e-ff873ed53e29)
-
-#### 11. Run your dapplet on the website.
-
-![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/7bdca926-c4d5-4984-97c0-100e2d062054)
-
-This article is in the [documentation](https://docs.dapplets.org/docs/get-started)
-
-![video](https://github.com/dapplets/dapplet-docs/blob/master/static/video/get_start.gif)
+![](https://github.com/dapplets/dapplet-docs/blob/master/static/video/ex_14_1.gif)
