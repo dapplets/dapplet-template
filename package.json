@@ -1,7 +1,7 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.2.0",
-  "description": "Template project of dapplet",
+  "name": "example14",
+  "version": "0.1.0",
+  "description": "Ex14: Wallet and contract interaction via Core Login interface.",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
