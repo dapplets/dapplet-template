@@ -3,7 +3,7 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "FEATURE",
-  "title": "Dapplet Template",
+  "title": "Example 14",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/dapplet-icon.png",
@@ -14,5 +14,8 @@
   },
   "dependencies": {
     "twitter-adapter.dapplet-base.eth": "0.9.0"
+  },
+  "overlays": {
+    "main": "http://localhost:3001/overlay/index.html"
   }
 }
