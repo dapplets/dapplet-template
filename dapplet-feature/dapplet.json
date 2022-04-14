@@ -6,7 +6,7 @@
   "title": "Example 8",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
-  "icon": "src/icons/ex08.png",
+  "icon": "src/icons/ex16.png",
   "contextIds": ["example-google-adapter.dapplet-base.eth"],
   "config": {
     "schema": "config/schema.json",

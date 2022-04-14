@@ -17,7 +17,6 @@ export default class GoogleAdapter {
     result: this.adapter.createWidgetFactory(Result),
   });
 
-  // LP: 1. implement communication between dapplets and pages
   public config = {
     MENU: {
       containerSelector: '#cnt, .ndYZfc',
@@ -35,7 +34,7 @@ export default class GoogleAdapter {
     },
     SEARCH_RESULT: {
       containerSelector: '#search',
-      contextSelector: '#rso > .g > div > .tF2Cxc, #rso > div > .g > div > .tF2Cxc',
+      contextSelector: '.g .jtfYYd, .g .tF2Cxc, .g table.jmjoTe',
       insPoints: {
         SEARCH_RESULT: {
           selector: '.yuRUbf',
@@ -47,10 +46,9 @@ export default class GoogleAdapter {
         id: searchNode.querySelector('.yuRUbf > a').href,
         title: searchNode.querySelector('h3').textContent,
         link: searchNode.querySelector('.yuRUbf > a').href,
-        description: searchNode.querySelector('.IsZvec').textContent,
+        description: searchNode.querySelector('.NJo7tc.Z26q7c.uUuwM, .VwiC3b.MUxGbd.yDYNvb.lyLwlc').textContent,
       }),
     },
-    // LP: 6. Add new insertion point WIDGETS on the top of Google widgets.
     WIDGETS: {
       containerSelector: '#search',
       contextSelector: '#rso',
@@ -64,8 +62,6 @@ export default class GoogleAdapter {
         id: '',
       }),
     },
-    // LP end
-    // LP: 7. Add a new insertion point DAPPLET_SEARCH_RESULT, which is similar to SEARCH_RESULT but adds a button to our search widget.
     DAPPLET_SEARCH_RESULT: {
       containerSelector: '#search',
       contextSelector: '.hlcw0c-dapp .tF2Cxc',
@@ -83,9 +79,7 @@ export default class GoogleAdapter {
         description: searchNode.querySelector('.IsZvec').textContent,
       }),
     },
-    // LP end
   };
-  // LP end
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
