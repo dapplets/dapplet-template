@@ -1,6 +1,5 @@
 // LP: 1. Import dependencies
-import { LitElement, html, css } from 'lit';
-import { property } from 'lit/decorators.js';
+
 // LP end
 
 export interface IButtonProps {
