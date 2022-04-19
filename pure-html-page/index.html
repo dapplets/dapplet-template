@@ -12,15 +12,28 @@
     <script type="module">
 
       // LP:  1. Import Bridge class from `https://unpkg.com/@dapplets/dapplet-overlay-bridge` pachage
-      
+      import Bridge from 'https://unpkg.com/@dapplets/dapplet-overlay-bridge';
       // LP end
 
       // LP:  2. Create Bridge class instance and subscribe for the `data` event.
-      
+      const bridge = new Bridge();
+
+      bridge.on('data', ({ message, counter }) => {
+        console.log('data')
+        document.querySelector('.dappletMessage').innerText = message;
+        document.querySelector('.dappletCounter').innerText = counter ?? 0;
+      });
       // LP end
 
       // LP:  3. Add an event on the button click
-      
+      let isTick = true;
+      const button = document.querySelector('.ch-state-btn');
+
+      button.addEventListener('click', async () => {
+        const counter = await bridge.increaseCounterAndToggleLabel(isTick);
+        document.querySelector('.dappletCounter').innerText = counter;
+        isTick = !isTick;
+      });
       // LP end
     </script>
   </head>

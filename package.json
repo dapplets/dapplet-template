@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "postinstall": "cd overlayWithReact && npm i",
-    "start": "rollup -w --config rollup.config.js",
+    "start": "concurrently -c \"yellow,blue\" -n \"dapplet,overlay\" \"rollup -w --config rollup.config.js\" \"cd overlayWithReact && npm start\"",
     "build": "rollup --config rollup.config.js",
     "prettify": "npx prettier --write .",
     "lint": "npx eslint ."
