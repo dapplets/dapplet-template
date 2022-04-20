@@ -18,27 +18,37 @@ export default class GoogleAdapter {
   // LP: 1. implement communication between dapplets and pages
   public config = {
     MENU: {
-      containerSelector: '',
-      contextSelector: '',
+      containerSelector: '#cnt, .ndYZfc',
+      contextSelector: '#top_nav, .jZWadf',
       insPoints: {
         MENU: {
-          selector: '',
-          insert: '',
+          selector: '.MUFPAc, .T47uwc',
+          insert: 'inside',
         },
       },
-      contextBuilder: (): ContextBuilder => ({}),
+      contextBuilder: (): ContextBuilder => ({
+        id: '',
+        insertPoint: '#rcnt, .mJxzWe',
+      }),
     },
     SEARCH_RESULT: {
-      containerSelector: '',
-      contextSelector: '',
+      containerSelector: '#search',
+      contextSelector: '#rso > .g .jtfYYd, #rso > div > .g .jtfYYd, #rso > div > div > .g .jtfYYd',
       insPoints: {
         SEARCH_RESULT: {
-          selector: '',
-          insert: '',
+          selector: '.yuRUbf',
+          insert: 'inside',
         },
       },
-      contextBuilder: (): ContextBuilder => ({}),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      contextBuilder: (searchNode: any): ContextBuilder => ({
+        id: searchNode.querySelector('.yuRUbf > a')?.href,
+        title: searchNode.querySelector('h3')?.textContent,
+        link: searchNode.querySelector('.yuRUbf > a')?.href,
+        description: searchNode.querySelector('.uUuwM')?.textContent || searchNode.querySelector('.IsZvec')?.textContent,
+      }),
     },
+    // LP end
     // LP: 6. Add new insertion point WIDGETS on the top of Google widgets.
 
     // LP end
