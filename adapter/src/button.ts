@@ -39,6 +39,7 @@ export class Button {
   public static contextInsPoints = {
     MENU: 'MENU',
     SEARCH_RESULT: 'SEARCH_RESULT',
+    DAPPLET_SEARCH_RESULT: 'DAPPLET_SEARCH_RESULT',
   };
 
   public mount(): void {
@@ -48,7 +49,7 @@ export class Button {
       stylesAdded = true;
     }
 
-    const { hidden } = this.state;
+    const { img, label, hidden, tooltip, isActive } = this.state;
 
     if (hidden) {
       this.el.innerHTML = '';
@@ -59,7 +60,37 @@ export class Button {
     }
 
     // LP: 2. implement the button HTML with label, image and tooltip for two insert points: MENU and SEARCH_RESULT
-
+    const activeNavEl: HTMLElement = document.querySelector('.hdtb-msel, .rQEFy');
+    if (this.insPointName === 'MENU') {
+      this.el.innerHTML = `
+        <div style="margin: 1px 1px 0; padding: 16px 12px 12px 10px;
+          ${isActive ? 'border-bottom: 3px solid #1a73e8; ' : 'border-bottom: none; '}
+          display: inline; cursor: pointer;"
+          ${tooltip ? `title="${tooltip}"` : ''}
+        >
+          <img style="width: 20px; margin-right: 5px; margin-bottom: -5px;" src="${img}"/>
+          <div style="display: inline-block; font-size: 13px; line-hight: 16px; ${
+            isActive
+              ? 'color: #1a73e8;'
+              : '-webkit-tap-highlight-color: rgba(0,0,0,.10); color: #5f6368;'
+          }">${label}</div>
+        </div>
+      `;
+      activeNavEl.style.borderBottom = isActive ? 'none' : '3px solid #1a73e8';
+    } else if (
+      this.insPointName === 'SEARCH_RESULT' ||
+      this.insPointName === 'DAPPLET_SEARCH_RESULT'
+    ) {
+      this.el.innerHTML = `
+        <div 
+          style="display: flex; align-items: center; cursor: pointer;"
+          ${tooltip ? `title="${tooltip}"` : ''}
+        >
+          <img style="width: 20px; margin-right: 1em; margin-bottom: 3px;" src="${img}"/>
+          <div style="display: inline-block; font-size: 1.1em; color: #F5504A; font-weight: bold;">${label}</div>
+        </div>
+      `;
+    }
     // LP end
   }
 
@@ -70,7 +101,14 @@ export class Button {
   private _createElement() {
     this.el = document.createElement('div');
     // LP: 3. add styles for the element depending on the insertion point
-
+    if (this.insPointName === 'MENU') {
+      this.el.classList.add('dapplet-widget-menu');
+    } else if (
+      this.insPointName === 'SEARCH_RESULT' ||
+      this.insPointName === 'DAPPLET_SEARCH_RESULT'
+    ) {
+      this.el.classList.add('dapplet-widget-results');
+    }
     // LP end
     this.el.addEventListener('click', () => {
       if (!this.state.disabled) {
