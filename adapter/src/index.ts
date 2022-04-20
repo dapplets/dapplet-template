@@ -26,13 +26,15 @@ export default class CommonAdapter implements IContentAdapter<ICommonAdapterConf
   public config = {
     // LP: 1. implement communication between dapplets and pages
     BODY: {
-      containerSelector: '',
-      contextSelector: '',
+      containerSelector: 'html',
+      contextSelector: 'body',
       insPoints: {
         BODY: {},
       },
       // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-      contextBuilder: (): ContextBuilder => ({}),
+      contextBuilder: (): ContextBuilder => ({
+        id: document.location.href,
+      }),
     },
     // LP end
   };
