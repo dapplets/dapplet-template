@@ -9,6 +9,7 @@
   },
   "dev": {
     "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "exampleHiddenString": "some string value",
+    "dataUrl": "https://localhost:3001/src/data.json"
   }
 }
