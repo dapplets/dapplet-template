@@ -10,7 +10,7 @@ const emitter = new Emitter();
 const callbackMap = new Map();
 let subscriptionCount = 0;
 // LP: 5. Add storage for counters
-
+const counter = {};
 // LP end
 
 const app = express();
@@ -26,6 +26,7 @@ app.use(function (req, res, next) {
 app.ws('/:feature', function (ws) {
   ws.on('message', (json) => {
     let rpc = null;
+
     try {
       rpc = JSON.parse(json);
     } catch (err) {
@@ -41,7 +42,9 @@ app.ws('/:feature', function (ws) {
       );
       return;
     }
+
     const { id, method, params } = rpc;
+
     if (
       id === undefined ||
       !method ||
@@ -60,8 +63,10 @@ app.ws('/:feature', function (ws) {
       );
       return;
     }
+
     if (method === 'subscribe') {
       const [ctx] = params;
+      
       if (!ctx || !ctx.id) {
         ws.send(
           JSON.stringify({
@@ -75,11 +80,18 @@ app.ws('/:feature', function (ws) {
         );
         return;
       }
+
       const tweetId = ctx.id;
       const subscriptionId = (++subscriptionCount).toString();
+
       // LP: 6. Initialize counter for current tweet
-      
+      if (!Object.prototype.hasOwnProperty.call(counter, tweetId)) {
+        counter[tweetId] = {
+          amount: 0,
+        };
+      }
       // LP end
+
       ws.send(
         JSON.stringify({
           jsonrpc: '2.0',
@@ -87,24 +99,43 @@ app.ws('/:feature', function (ws) {
           result: subscriptionId,
         }),
       );
+
       // LP: 7. Send counter in `params`. method = subscriptionId
-      
+      ws.send(
+        JSON.stringify({
+          jsonrpc: '2.0',
+          method: subscriptionId,
+          params: [{ amount: counter[tweetId].amount }],
+        }),
+      );
       // LP end
+
       const callback = (currentId) => {
         if (currentId !== tweetId) return;
+
         try {
           // LP: 8. Send counter in `params`. method = subscriptionId, id = currentId
-          
+          ws.send(
+            JSON.stringify({
+              jsonrpc: '2.0',
+              method: subscriptionId,
+              id: currentId,
+              params: [{ amount: counter[currentId].amount }],
+            }),
+          );
           // LP end
         } catch (e) {
           emitter.off('attached', callbackMap.get(subscriptionId));
         }
       };
+
       emitter.on('attached', callback);
       callbackMap.set(subscriptionId, callback);
     } else if (method === 'increment') {
       // LP: 9. Implement counter increment
-      
+      const [currentId] = params;
+      counter[currentId].amount += 1;
+      emitter.emit('attached', currentId);
       // LP end
     } else {
       ws.send(
