@@ -7,6 +7,8 @@ interface IStorage {
 
 interface IBridge {
   // LP: 5. Add interface for Bridge
+  login: () => Promise<void>
+  logout: () => Promise<void>
   // LP end
 }
 
@@ -15,7 +17,15 @@ const App = (props: IDappStateProps<IStorage>) => {
   const bridge = new Bridge<IBridge>()
 
   // LP: 6. Add functions to connect and disconnect the account
+  const handleLogIn = (e: any) => {
+    e.preventDefault()
+    bridge.login()
+  }
 
+  const handleLogOut = (e: any) => {
+    e.preventDefault()
+    bridge.logout()
+  }
   // LP end
 
   return (
@@ -29,7 +39,7 @@ const App = (props: IDappStateProps<IStorage>) => {
           <button
             className="login"
             // LP: 7.1 Add the Login function
-
+            onClick={handleLogIn}
             // LP end
           >
             Log in
@@ -43,7 +53,7 @@ const App = (props: IDappStateProps<IStorage>) => {
             <button
               className="logout"
               // LP: 7.2 Add the Logout function
-
+              onClick={handleLogOut}
               // LP end
             >
               Log out

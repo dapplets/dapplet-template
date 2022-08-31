@@ -16,17 +16,22 @@ export default class TwitterFeature {
   })
 
   private overlay = Core.overlay<IBridge>({ name: 'overlay', title: 'Exercise 17' })
-  // LP: 1. Add method 'useState' to the overlay
-
-  // LP end
-  // LP: 2. Declare the API in the overlay
-
+    // LP: 1. Add method 'useState' to the overlay
+    .useState(this.state)
+    // LP end
+    // LP: 2. Declare the API in the overlay
+    .declare(this.api)
   // LP end
 
   async activate(): Promise<void> {
     // LP: 3. Use the API's function for initialization account
+    await this.api.initializeCurrentAccount()
     // LP end
     // LP: 4. Open the overlay and update the data about the session by the home button click
+    Core.onAction(() => {
+      this.overlay.open()
+      this.api.initializeCurrentAccount()
+    })
     // LP end
   }
 }
