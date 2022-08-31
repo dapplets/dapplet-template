@@ -1,15 +1,23 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.2.0",
-  "description": "Template project of dapplet",
-  "main": "lib/index.js",
+  "name": "example17",
+  "version": "0.1.0",
+  "description": "Ex.17: Overlay With Login",
+  "main": "",
   "scripts": {
-    "start": "rollup -w --config rollup.config.js",
-    "build": "rollup --config rollup.config.js",
+    "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay\" \"npm run install:dapplet\" \"npm run install:overlay\"",
+    "install:dapplet": "cd dapplet && npm i",
+    "install:overlay": "cd overlay && npm i",
+    "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay\" \"npm run start:dapplet\" \"npm run start:overlay\"",
+    "start:dapplet": "cd dapplet && npm start",
+    "start:overlay": "cd overlay && npm start",
     "prettify": "prettier --write ../dapplet-template",
     "eslint": "eslint ../dapplet-template --ext .ts --fix",
     "stylelint": "stylelint ../dapplet-template/**/*.{css,scss,module.scss} --fix"
   },
+  "cacheDirectories": [
+    "dapplet/node_modules",
+    "overlay/node_modules"
+  ],
   "author": "Dapplets Project",
   "license": "MIT",
   "devDependencies": {
@@ -24,6 +32,8 @@
     "rollup-plugin-serve": "^1.1.0",
     "tslib": "^2.3.1",
     "typescript": "^4.5.5",
+    "@types/animejs": "^3.1.5",
+    "concurrently": "^6.5.1",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "prettier": "^2.6.2",
