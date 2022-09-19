@@ -42,11 +42,11 @@ export default class TwitterFeature {
 
   ethereumButtonClickHandler = async (tweet: any) => {
     // LP: 2. Open overlay if you want to show login popup in it
-    this.overlay.send('');
+    this.overlay.open();
     // LP end
-
+    
     // LP: 3. Create new Ethereum session or reuse existing
-    const prevSessions = await Core.sessions();
+    const prevSessions = await Core.sessions('');
     const prevSession = prevSessions.find(x => x.authMethod === 'ethereum/goerli');
     const session = prevSession ?? await Core.login({ authMethods: ['ethereum/goerli'], target: this.overlay });
     // LP end
@@ -67,9 +67,9 @@ export default class TwitterFeature {
 
   nearButtonClickHandler = async (tweet: any) => {
     // LP: 6. Open overlay if you want to show login popup in it
-    this.overlay.send('');
+    this.overlay.open();
     // LP end
-    
+   
     // LP: 7. Create new NEAR session or reuse existing
     const prevSessions = await Core.sessions();
     const prevSession = prevSessions.find(x => x.authMethod === 'near/testnet');

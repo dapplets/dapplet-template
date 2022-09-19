@@ -43,10 +43,10 @@ sessions.forEach(x => x.logout());
 
 ### LP: 2. Open overlay if you want to show login pop-up in it
 
-The `overlay.send()` method will open the overlay. An overlay must be opened before logging in if you want to show a pop-up over a blurry overlay.
+The `overlay.open()` method will open the overlay. An overlay must be opened before logging in if you want to show a pop-up over a blurry overlay.
 
 ```typescript
-this.overlay.send('');
+this.overlay.open();
 ```
 
 ### LP: 3. Create a new Ethereum session or reuse an existing one
@@ -89,7 +89,7 @@ await contract.addTweet(JSON.stringify(tweet)); // write
 The same like in the LP 2.
 
 ```typescript
-this.overlay.send('');
+this.overlay.open();
 ```
 
 ### LP: 7. Create a new NEAR session or reuse an existing one
