@@ -2,9 +2,13 @@
 
 [![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
 
+or 
+
+[Create Dapplet App](https://www.npmjs.com/package/create-dapplet-app)
+
 To run the simpliest dapplet, follow these steps.
 
-#### 1. Clone [Dapplet Template](https://github.com/dapplets/dapplet-template) repository locally.
+#### 1. Use [Dapplet Template](https://github.com/dapplets/dapplet-template) repository locally.
 
 #### 2. Change module name from "dapplet-template.dapplet-base.eth" to yours in `package.json` file.
 
