@@ -16,7 +16,7 @@ or
 
 [Dapplet Template](https://github.com/dapplets/dapplet-template) also allows you to create your own project locally.
 
-<img width="263" alt="run_template" src="https://user-images.githubusercontent.com/79759758/191844052-e42bf8e4-2275-4bd0-8b54-a1c19ab9039f.png">
+<img width="847" alt="run_temp" src="https://user-images.githubusercontent.com/79759758/191844612-9615bf33-b93d-4a63-b8db-7a1749fcb3af.png">
 
 
 ## Recommended
