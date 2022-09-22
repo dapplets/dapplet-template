@@ -1,12 +1,29 @@
 # Getting Started
 
+Dapplet is available:
+
+**Gitpod** ( platform automating the provisioning of ready-to-code developer environments). This is a way to quickly launch a remotely located dapplet and try to work with it.
+
 [![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
 
 or 
 
+**Utilite** for quick module creation: [Create Dapplet App](https://www.npmjs.com/package/create-dapplet-app). Run the project locally and follow the instructions in the console.
+
 [Create Dapplet App](https://www.npmjs.com/package/create-dapplet-app)
 
+or 
+
+
+[Dapplet Template](https://github.com/dapplets/dapplet-template) also allows you to create your own project locally.
+
+
+##Recommended
+
+Use the Create Dapplet App to create your own dapplet locally. This option allows you to create the desired configuration of the future project already at the start.
+
 To run the simpliest dapplet, follow these steps.
+
 
 #### 1. Use [Dapplet Template](https://github.com/dapplets/dapplet-template) repository locally.
 
