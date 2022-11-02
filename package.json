@@ -8,7 +8,7 @@
     "build": "rollup --config rollup.config.js",
     "prettify": "prettier --write ../dapplet-template",
     "eslint": "eslint ../dapplet-template --ext .ts --fix",
-    "stylelint": "stylelint ./dapplet-template/*.{css,scss,module.scss} --fix"
+    "stylelint": "stylelint ../dapplet-template/**/*.{css,scss,module.scss} --fix"
   },
   "author": "Dapplets Project",
   "license": "MIT",
