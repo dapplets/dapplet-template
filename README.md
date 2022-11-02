@@ -6,21 +6,21 @@ To run a basic dapplet, follow these steps.
 
 1. Run the dapplet using **Gitpod**. It is the easiest way to launch **the remotely located dapplet** into the web-browser and try to work with it:
 
-  [![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
+[![Open in Gitpod!](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dapplets/dapplet-template)
 
-  Gitpod can provide fully initialized, perfectly set-up developer environments for any kind of software project. More about Gitpod you can find on its [official website](https://www.gitpod.io/).
+Gitpod can provide fully initialized, perfectly set-up developer environments for any kind of software project. More about Gitpod you can find on its [official website](https://www.gitpod.io/).
 
 2. [Create Dapplet App](https://www.npmjs.com/package/create-dapplet-app) is the best way to start building your own dapplet. To create **a local project**, run:
 
-  ```bash
-  npx create-dapplet-app
-  ```
+```bash
+npx create-dapplet-app
+```
 
-  This method is currently the most advanced and allows you to flexibly configure your project. You can immediately select the type of project, add an adapter, overlay or server to the dapplet.
+This method is currently the most advanced and allows you to flexibly configure your project. You can immediately select the type of project, add an adapter, overlay or server to the dapplet.
 
 3. You can use this repo as a template for **your GitHub repository**. Use the button on the project page:
 
-  ![Use Template button](https://user-images.githubusercontent.com/79759758/191844612-9615bf33-b93d-4a63-b8db-7a1749fcb3af.png)
+![Use Template button](https://user-images.githubusercontent.com/79759758/191844612-9615bf33-b93d-4a63-b8db-7a1749fcb3af.png)
 
 #### 2. Change the module name from "dapplet-template.dapplet-base.eth" to your own one in the `package.json` file.
 
@@ -83,7 +83,7 @@ import EXAMPLE_IMG from './icons/dapplet-icon.png';
 export default class TwitterFeature {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
   @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
-  
+
   activate() {
     const { button } = this.adapter.exports;
     this.adapter.attachConfig({
