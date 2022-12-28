@@ -1,15 +1,14 @@
 {
   "type": "object",
-  "required": ["exampleString", "exampleHiddenString"],
+  "required": ["transferAmountEth", "transferAmountNear"],
   "properties": {
-    "exampleString": {
-      "type": "string",
-      "title": "Example of string property"
+    "transferAmountEth": {
+      "type": "number",
+      "title": "Transfer amount Ethereum"
     },
-    "exampleHiddenString": {
-      "type": "string",
-      "title": "Example of hidden string property",
-      "hidden": true
+    "transferAmountNear": {
+      "type": "number",
+      "title": "Transfer amount NEAR"
     }
   }
 }

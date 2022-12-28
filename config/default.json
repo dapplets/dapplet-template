@@ -1,14 +1,14 @@
 {
   "main": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "transferAmountEth": 0.001,
+    "transferAmountNear": 0.5
   },
   "test": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "transferAmountEth": 0.001,
+    "transferAmountNear": 0.5
   },
   "dev": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "transferAmountEth": 0.001,
+    "transferAmountNear": 0.5
   }
 }
