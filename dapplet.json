@@ -1,12 +1,20 @@
 {
-  "name": { "$ref": "package.json#/name" },
+  "name": {
+    "$ref": "package.json#/name"
+  },
   "branch": "default",
-  "version": { "$ref": "package.json#/version" },
+  "version": {
+    "$ref": "package.json#/version"
+  },
   "type": "FEATURE",
-  "title": "Dapplet Template",
-  "description": { "$ref": "package.json#/description" },
-  "main": { "$ref": "package.json#/main" },
-  "icon": "src/icons/dapplet-icon.png",
+  "title": "Example 18",
+  "description": {
+    "$ref": "package.json#/description"
+  },
+  "main": {
+    "$ref": "package.json#/main"
+  },
+  "icon": "src/icons/ex_18.png",
   "contextIds": ["twitter-adapter.dapplet-base.eth"],
   "config": {
     "schema": "config/schema.json",
