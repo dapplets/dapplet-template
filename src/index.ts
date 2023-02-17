@@ -1,22 +1,53 @@
 import {} from '@dapplets/dapplet-extension'
-import EXAMPLE_IMG from './icons/dapplet-icon.png'
+import NOTIFICATION_IMG from './icons/ex_19.png'
 
 @Injectable
-export default class TwitterFeature {
+export default class Notification {
   @Inject('twitter-config.dapplet-base.eth')
   public adapter
 
-  activate() {
+  async activate() {
     const { button } = this.adapter.exports
     this.adapter.attachConfig({
-      POST: () =>
+      PROFILE: () => [
         button({
           DEFAULT: {
-            label: 'Injected Button',
-            img: EXAMPLE_IMG,
-            exec: () => Core.alert('Hello, World!'),
+            label: 'Notify',
+            img: NOTIFICATION_IMG,
+            exec: this.onNotification,
           },
         }),
+        button({
+          DEFAULT: {
+            label: 'Alert',
+            exec: this.onAlert,
+          },
+        }),
+        button({
+          DEFAULT: {
+            label: 'Confirm',
+            exec: this.onConfirm,
+          },
+        }),
+      ],
     })
+  }
+
+  onNotification = () =>
+    Core.notify({
+      title: "Notification's title",
+      message: 'This is a full notification message',
+      teaser: 'This is a teaser message',
+    })
+
+  onAlert = () => Core.alert('This is an alert')
+
+  onConfirm = async () => {
+    const isConfirmed = await Core.confirm('This is a confirm')
+    if (isConfirmed) {
+      Core.notify('Confirmed!')
+    } else {
+      Core.notify('Rejected!')
+    }
   }
 }

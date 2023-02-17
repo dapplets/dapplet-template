@@ -1,7 +1,7 @@
 {
-  "name": "dapplet-template.dapplet-base.eth",
-  "version": "0.2.0",
-  "description": "Template project of dapplet",
+  "name": "example19.dapplet-base.eth",
+  "version": "0.1.0",
+  "description": "Ex18: Notifications",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
