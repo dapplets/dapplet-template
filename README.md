@@ -1,3 +1,5 @@
+<img width="1245" alt="dapplet-template" src="https://user-images.githubusercontent.com/43613968/225052440-437281a8-63c7-44ba-80df-391974396a4b.png">
+
 # Run Your Dapplet
 
 To run a basic dapplet, follow these steps.
