@@ -140,3 +140,5 @@ You will see your module in the list of development modules. Here you can start 
 ![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/7bdca926-c4d5-4984-97c0-100e2d062054)
 
 This article is in the [documentation](https://docs.dapplets.org/docs/get-started)
+
+![video](https://github.com/dapplets/dapplet-docs/blob/master/static/video/get_start.gif)
