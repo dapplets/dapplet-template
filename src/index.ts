@@ -12,7 +12,6 @@ export default class TwitterFeature {
       POST: () =>
         button({
           DEFAULT: {
-            id: 'button',
             label: 'Injected Button',
             img: EXAMPLE_IMG,
             exec: () => Core.alert('Hello, World!'),
