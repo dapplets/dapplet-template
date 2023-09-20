@@ -6,7 +6,7 @@ export default class TwitterFeature {
   @Inject('twitter-config.dapplet-base.eth')
   public adapter
 
-  async activate() {
+  activate() {
     const { button } = this.adapter.exports
     this.adapter.attachConfig({
       POST: () =>
@@ -15,7 +15,7 @@ export default class TwitterFeature {
             id: 'button',
             label: 'Injected Button',
             img: EXAMPLE_IMG,
-            exec: () => Core.alert('Hello Word!'),
+            exec: () => Core.alert('Hello, World!'),
           },
         }),
     })
