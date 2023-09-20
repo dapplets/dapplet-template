@@ -60,10 +60,9 @@ The Twitter adapter is used by default.
 
 Here is our list of adapters available at the moment:
 
-- [twitter-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/twitter-adapter) - site-specific adapter for [Twitter](https://twitter.com);
-- [instagram-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/instagram-adapter) - site-specific adapter for [Instagram](https://instagram.com);
-- [identity-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/identity-adapter) - virtual adapter (interface), which is an abstract of two adapters above;
-- [common-adapter.dapplet-base.eth](https://github.com/dapplets/dapplet-modules/tree/master/packages/common-adapter) - viewport adapter is a universal adapter which contains generic insertion points and is compatible with any web-sites.
+- [twitter-config.dapplet-base.eth](https://github.com/dapplets/modules-monorepo/tree/main/packages/adapters/twitter-config) - site-specific adapter for [Twitter](https://twitter.com);
+- [github-config.dapplet-base.eth](https://github.com/dapplets/modules-monorepo/tree/develop/packages/adapters/github-config) - site-specific adapter for [GitHub](https://github.com);
+- [social-virtual-config.dapplet-base.eth](https://github.com/dapplets/modules-monorepo/tree/develop/packages/adapters/social-virtual-config) - virtual adapter (interface) for social networks, which is an abstract of two adapters above.
 
 More about Twitter Adapter you can find [here](https://docs.dapplets.org/docs/adapters-docs-list).
 
@@ -71,41 +70,38 @@ More about Twitter Adapter you can find [here](https://docs.dapplets.org/docs/ad
 
 `ContextId` is an identifier of a context to which your module is bound. This is usually the same as the name of an adapter you are using. It may be:
 
-- the name of an adapter you depend on (e.g. `twitter-adapter.dapplet-base.eth`);
+- the name of an adapter you depend on (e.g. `twitter-config.dapplet-base.eth`);
 - the domain name of a website that your dapplet will run on (e.g. `twitter.com`);
 - the identifier of a dynamic context (e.g. `twitter.com/1346093004537425927`).
 
 #### 8. Specify the argument of @Inject decorator with the chosen adapter in the `/src/index.ts` module and add the `activate()` method with a simple dapplet code.
 
 ```js
-import {} from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/dapplet-icon.png';
+import {} from '@dapplets/dapplet-extension'
+import EXAMPLE_IMG from './icons/dapplet-icon.png'
 
 @Injectable
 export default class TwitterFeature {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any;
+  @Inject('twitter-config.dapplet-base.eth')
+  public adapter
 
   activate() {
-    const { button } = this.adapter.exports;
+    const { button } = this.adapter.exports
     this.adapter.attachConfig({
       POST: () =>
         button({
-          initial: 'DEFAULT',
           DEFAULT: {
             label: 'Injected Button',
             img: EXAMPLE_IMG,
-            exec: () => alert('Hello, World!'),
+            exec: () => Core.alert('Hello, World!')
           }
         })
-    });
+    })
   }
 }
 ```
 
-#### 9. Install the Dapplets Extension for your Chrome browser (if not installed) - follow the [Installation](https://docs.dapplets.org/docs/installation) steps.
-
-#### 10. Install dependencies and run the code:
+#### 9. Install dependencies and run the code:
 
 ```bash
 npm i
@@ -126,20 +122,21 @@ In this example we use a Rollup bundler to compile modules but you can use whate
 
 The address [http://localhost:3001/dapplet.json](http://localhost:3001/dapplet.json) is a link to your dapplet manifest file. Copy it to a clipboard.
 
-#### 11. Connect the development server to the Dapplets Extension.
+#### 10. Connect the development server to the Dapplets Extension.
 
 Paste the URL to the Developer tab of the Dapplet Extension's popup and click **Add**.
 
-![Developer tab of Extension](https://user-images.githubusercontent.com/43613968/192805069-37d7be51-2a79-41bb-9810-bd01de23342e.png)
+![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/7ddf8291-d223-41f2-be9b-a05f5a5e4b8f)
+
 
 > If an error occurs, look [here](https://docs.dapplets.org/docs/publishing).
 
 You will see your module in the list of development modules. Here you can start the deployment process.
 
-![Developer tab of Extension](https://user-images.githubusercontent.com/43613968/192805238-9d2ee581-0869-4543-ae2d-3c66a89d4ba3.png)
+![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/b9a6a46d-1e0d-421b-909e-ff873ed53e29)
 
-#### 12. Run your dapplet on the website.
+#### 11. Run your dapplet on the website.
 
-![Developer tab of Extension](https://user-images.githubusercontent.com/43613968/192805390-574a2c66-729c-4f82-b7f2-218770e924c8.png)
+![Developer tab of Extension](https://github.com/dapplets/dapplet-template/assets/43613968/7bdca926-c4d5-4984-97c0-100e2d062054)
 
-![video](https://docs.dapplets.org/assets/images/get_start-baeacbf6a7a57c08a16ba5c32c8bf1ee.gif)
+This article is in the [documentation](https://docs.dapplets.org/docs/get-started)
