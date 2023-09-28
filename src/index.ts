@@ -1,5 +1,5 @@
 import {} from '@dapplets/dapplet-extension'
-
+import data from './data.json'
 interface NftMetadata {
   image: string
   text: string
@@ -8,23 +8,17 @@ interface NftMetadata {
 @Injectable
 export default class TwitterFeature {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,  @typescript-eslint/explicit-module-boundary-types
-  @Inject('twitter-adapter.dapplet-base.eth') public adapter: any
+  @Inject('twitter-config.dapplet-base.eth') public adapter: any
 
-  async activate() {
-    const url = await Core.storage.get('dataUrl')
-    let nfts: NftMetadata[]
-    try {
-      nfts = await this._fetchNfts(url)
-    } catch (err) {
-      console.log('Error getting NFTs.', err)
-    }
+  async activate(): Promise<void> {
+    let nfts: NftMetadata[] = data
 
-    const { label, button } = this.adapter.exports
+    const { avatarBadge, button } = this.adapter.exports
     this.adapter.attachConfig({
       POST: (ctx) =>
         nfts &&
         nfts.map((nft) =>
-          label({
+          avatarBadge({
             DEFAULT: {
               img: nft.image,
               basic: true,
@@ -43,15 +37,5 @@ export default class TwitterFeature {
           })
         ),
     })
-  }
-
-  private async _fetchNfts(url: string): Promise<NftMetadata[]> {
-    let res: any
-    try {
-      res = await fetch(url)
-    } catch (err) {
-      console.log('Error fetching NFTs.', err)
-    }
-    return res.json()
   }
 }
