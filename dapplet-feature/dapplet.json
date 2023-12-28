@@ -23,6 +23,6 @@
     "default": "config/default.json"
   },
   "dependencies": {
-    "example-google-adapter.dapplet-base.eth": "0.3.2"
+    "example-google-adapter.dapplet-base.eth": "0.3.3"
   }
 }
