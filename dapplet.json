@@ -23,7 +23,7 @@
     "default": "config/default.json"
   },
   "dependencies": {
-    "twitter-config.dapplet-base.eth": "0.1.8"
+    "twitter-config.dapplet-base.eth": "0.1.14"
   },
   "overlays": {
     "example-04-overlay": "http://localhost:3000"
