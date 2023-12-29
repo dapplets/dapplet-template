@@ -22,6 +22,6 @@
     "overlay": "http://localhost:3000"
   },
   "dependencies": {
-    "twitter-config.dapplet-base.eth": "0.1.8"
+    "twitter-config.dapplet-base.eth": "0.1.14"
   }
 }
