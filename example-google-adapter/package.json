@@ -1,7 +1,7 @@
 {
-  "name": "example-google-adapter.dapplet-base.eth",
+  "name": "example-google-adapter-ex10.dapplet-base.eth",
   "version": "0.5.0",
-  "description": "Example Google Config",
+  "description": "Example Google Config ex10",
   "main": "index.json",
   "scripts": {
     "start": "serve -l 8081"

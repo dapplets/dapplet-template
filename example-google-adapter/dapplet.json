@@ -7,7 +7,7 @@
     "$ref": "package.json#/version"
   },
   "type": "CONFIG",
-  "title": "Google Config",
+  "title": "Google Config Ex 10",
   "description": {
     "$ref": "package.json#/description"
   },
