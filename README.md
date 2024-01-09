@@ -1,4 +1,5 @@
-<img width="1245" alt="dapplet-template" src="https://user-images.githubusercontent.com/43613968/225052440-437281a8-63c7-44ba-80df-391974396a4b.png">
+![dapplet-template](/docs/dark_1.png#gh-dark-mode-only)
+![dapplet-template](/docs/light_1.png#gh-light-mode-only)
 
 # Run Your Dapplet
 
